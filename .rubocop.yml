@@ -1,0 +1,18 @@
+require: rubocop-rspec
+AllCops:
+  Include:
+  - "app/**/*.rb"
+  - "lib/**/*.rb"
+  - "lib/**/*.rake"
+  Exclude:
+  - "config/**/*.rb"
+  - "vendor/**/*"
+  - "db/**/*"
+  - "bin/**/*"
+  DisplayCopNames: true
+  StyleGuideCopsOnly: true
+
+Metrics/LineLength:
+  Max: 125
+Metrics/MethodLength:
+  Max: 25
