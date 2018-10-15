@@ -1,0 +1,7 @@
+<h1 align="center">
+  <%- if signed_in? %>
+      Hello
+  <%- else %>
+      Hello, please <%= link_to 'sign in', user_github_omniauth_authorize_path %> (GitHub)
+  <% end %>
+</h1>
