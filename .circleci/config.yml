@@ -42,7 +42,7 @@ jobs:
       - run:
           name: install codeclimate
           command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            curl --silent -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
         
       # Database setup
@@ -55,7 +55,6 @@ jobs:
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            
             ./cc-test-reporter before-build
             bundle exec rspec --format progress \
                             --format RspecJunitFormatter \
