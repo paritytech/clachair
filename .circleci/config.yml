@@ -52,6 +52,8 @@ jobs:
       # run tests!
       - run:
           name: run tests
+          environment:
+            CC_TEST_REPORTER_ID: bec1103495a56d607073c58e2d46c269dabf0aaf855305928893a5ac73443b4c
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
