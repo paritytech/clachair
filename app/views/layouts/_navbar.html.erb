@@ -6,4 +6,17 @@
       </div>
     </div>
   </div>
+  <div class="d-flex justify-content-end">
+    <ul class="navbar-nav mr-auto">
+      <%- if signed_in? %>
+        <li class="nav-item active">
+          <%= link_to 'sign out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+        </li>
+      <%- else %>
+        <li class="nav-item active">
+          <%= link_to 'sign in (GitHub)', user_github_omniauth_authorize_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </nav>

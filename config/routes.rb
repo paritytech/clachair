@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  root  'welcome#index'
+  devise_for :users,  controllers: { omniauth_callbacks: 'callbacks' }
+  root  'home#index'
+
+  devise_scope :user do
+    delete 'destroy_user_session' => 'callbacks#destroy'
+  end
 end

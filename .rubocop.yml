@@ -10,8 +10,9 @@ AllCops:
   - "db/**/*"
   - "bin/**/*"
   DisplayCopNames: true
-  StyleGuideCopsOnly: true
 
+Style/Documentation:
+  Enabled: false
 Metrics/LineLength:
   Max: 125
 Metrics/MethodLength:
