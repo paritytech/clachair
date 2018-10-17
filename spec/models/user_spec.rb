@@ -12,16 +12,16 @@ RSpec.describe User, type: :model do
       let!(:user) { create :user }
       let(:auth) { mock_auth user }
 
-      it 'user logging in' do
+      it "doesn't create a new User record" do
         expect{ User.from_omniauth(auth) }.to_not change{ User.count }
       end
     end
 
-    context 'the user is not exist' do
+    context 'the user does not exist in the DB' do
       let(:user) { build :user }
       let(:auth) { mock_auth user }
 
-      it 'create new user' do
+      it 'creates a new User record' do
         expect{ User.from_omniauth(auth) }.to change{ User.count }.by(1)
       end
     end

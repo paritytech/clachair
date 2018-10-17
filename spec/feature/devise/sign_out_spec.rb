@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User signed out' do
   given(:user) { create(:user) }
   background do
-    logged_as user
+    logged_in_as user
   end
 
   scenario 'User try to sign out' do
