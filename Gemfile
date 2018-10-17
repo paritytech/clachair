@@ -66,6 +66,7 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'simplecov', require: false
   gem 'rack_session_access'
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
