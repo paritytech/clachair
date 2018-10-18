@@ -22,7 +22,9 @@ RSpec.describe User, type: :model do
       let(:auth) { mock_auth user }
 
       it 'creates a new User record' do
-        expect{ User.from_omniauth(auth) }.to change{ User.count }.by(1)
+        expect do
+          User.from_omniauth(auth).save!
+        end.to change{ User.count }.by(1)
       end
     end
   end

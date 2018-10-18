@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.5.1-node-browsers
-      
+
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/postgres:10-alpine-ram
         environment:
@@ -44,7 +44,7 @@ jobs:
           command: |
             curl --silent -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
-        
+
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:migrate
@@ -54,6 +54,7 @@ jobs:
           name: run tests
           environment:
             CC_TEST_REPORTER_ID: bec1103495a56d607073c58e2d46c269dabf0aaf855305928893a5ac73443b4c
+            ORGANIZATIONS: Test_organisation
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"

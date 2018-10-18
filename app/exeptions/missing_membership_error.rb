@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AuthenticationError < StandardError
+class MissingMembershipError < StandardError
   def message
     'You are not in an organization!'
   end

@@ -18,18 +18,25 @@ WebMock.disable_net_connect!(allow_localhost: true)
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.before(:each) do
-    stub_request(:get, "https://api.github.com/user/orgs").
-      with(
-        headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'Authorization'=>'token test_token',
-          'Host'=>'api.github.com',
-          'User-Agent'=>'Ruby'
-        }).
-      to_return(status: 200, body: "[{\"login\":\"test_organisation\",\"id\":123456}]", headers: {})
+  config.around(:each) do |example|
+    vcr_tag = example.metadata[:vcr]
+
+    if vcr_tag == false
+      VCR.turned_off(&example)
+    else
+      options = vcr_tag.is_a?(Hash) ? vcr_tag : {}
+      path_data = [example.metadata[:description]]
+      parent = example.example_group
+      while parent != RSpec::ExampleGroups
+        path_data << parent.metadata[:description]
+        parent = parent.parent
+      end
+
+      name = path_data.map{|str| str.underscore.gsub(/\./,'').gsub(/[^\w\/]+/, '_').gsub(/\/$/, '')}.reverse.join("/")
+
+      VCR.use_cassette(name, options, &example)
     end
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
