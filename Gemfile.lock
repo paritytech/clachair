@@ -83,6 +83,8 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -111,6 +113,12 @@ GEM
     fuubar (2.3.2)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
+    github_api (0.18.2)
+      addressable (~> 2.4)
+      descendants_tracker (~> 0.0.4)
+      faraday (~> 0.8)
+      hashie (~> 3.5, >= 3.5.2)
+      oauth2 (~> 1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashdiff (0.3.7)
@@ -357,6 +365,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   fuubar
+  github_api
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

@@ -16,16 +16,5 @@ RSpec.describe User, type: :model do
         expect{ User.from_omniauth(auth) }.to_not change{ User.count }
       end
     end
-
-    context 'the user does not exist in the DB' do
-      let(:user) { build :user }
-      let(:auth) { mock_auth user }
-
-      it 'creates a new User record' do
-        expect do
-          User.from_omniauth(auth).save!
-        end.to change{ User.count }.by(1)
-      end
-    end
   end
 end

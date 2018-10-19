@@ -5,7 +5,7 @@ module OmniauthMacros
       uid:          user.uid,
       info:         { email: user.email, name: user.name },
       extra:        { raw_info: { login: user.login }},
-      credentials:  { token: 'test_token' }
+      credentials:  { token: user.token }
     }
 
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(credentials)

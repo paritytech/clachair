@@ -7,7 +7,7 @@ class CallbacksController < Devise::OmniauthCallbacksController
     auth = request.env['omniauth.auth']
 
     user = User.from_omniauth(auth)
-    user.update(token: auth.credentials.token)
+    user.assign_attributes(token: auth.credentials.token)
 
     raise MissingMembershipError unless (user.organisations & WHITELISTED_ORGS).any?
 

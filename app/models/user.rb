@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  GITHUB_ORGS_QUERY_URL = URI.parse('https://api.github.com/user/orgs')
-
   devise :rememberable, :omniauthable, omniauth_providers: [:github]
 
   validates :login, :uid, presence: true, uniqueness: true
@@ -18,14 +16,7 @@ class User < ApplicationRecord
   end
 
   def organisations
-    request = Net::HTTP::Get.new(GITHUB_ORGS_QUERY_URL)
-    request['Authorization'] = "token #{token}"
-    req_options = { use_ssl: GITHUB_ORGS_QUERY_URL.scheme == 'https' }
-
-    response = Net::HTTP.start(GITHUB_ORGS_QUERY_URL.hostname, GITHUB_ORGS_QUERY_URL.port, req_options) do |http|
-      http.request(request)
-    end
-
-    response.code == '200' ? JSON.parse(response.body).map { |a| a['login'].downcase } : []
+    user = Github.new oauth_token: token, auto_pagination: true
+    user.orgs.list.body.map { |org| org[:login]&.downcase }.compact
   end
 end
