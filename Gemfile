@@ -38,6 +38,7 @@ gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth-github'
+gem 'github_api'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -66,6 +67,8 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'simplecov', require: false
   gem 'rack_session_access'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

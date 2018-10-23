@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/user/orgs?access_token=valid_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - token valid_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Fri, 19 Oct 2018 04:32:53 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4998'
+      X-Ratelimit-Reset:
+      - '1539926652'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - W/"1dc62d8388ee6db38db9cc12a2134645"
+      X-Oauth-Scopes:
+      - read:org, user:email
+      X-Accepted-Oauth-Scopes:
+      - admin:org, read:org, repo, user, write:org
+      X-Oauth-Client-Id:
+      - f31b6fee21b1fc076c05
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - DCAD:19DA:14264FD:34228AE:5BC95E74
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"login":"Test_organisation","id":1111111,"node_id":"nodeid","url":"https://api.github.com/orgs/test_organisation","repos_url":"https://api.github.com/orgs/test_organisation/repos","events_url":"https://api.github.com/orgs/test_organisation/events","hooks_url":"https://api.github.com/orgs/test_organisation/hooks","issues_url":"https://api.github.com/orgs/test_organisation/issues","members_url":"https://api.github.com/orgs/test_organisation/members{/member}","public_members_url":"https://api.github.com/orgs/test_organisation/public_members{/member}","avatar_url":"https://avatars2.githubusercontent.com/u/1111111?v=4","description":"test_description"}]'
+    http_version:
+  recorded_at: Fri, 19 Oct 2018 04:32:53 GMT
+recorded_with: VCR 4.0.0

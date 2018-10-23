@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
 class CallbacksController < Devise::OmniauthCallbacksController
+  WHITELISTED_ORGS = ENV['ORGANIZATIONS'].split(',').map(&:downcase).freeze
+
   def github
     user = User.from_omniauth(request.env['omniauth.auth'])
-    sign_in_and_redirect user
 
-    flash[:notice] = 'Signed in successfully.'
+    if (user.organisations & WHITELISTED_ORGS).any?
+      user.save!
+      sign_in_and_redirect user
+      flash[:notice] = 'Signed in successfully.'
+    else
+      flash[:alert] = 'You are not in any of the allowed organisations.'
+      render file: 'public/401', status: :unauthorized
+    end
   end
 
   def destroy
