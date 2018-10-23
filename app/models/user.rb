@@ -15,6 +15,9 @@ class User < ApplicationRecord
     user
   end
 
+  # if the user doesn't have any organization, github API will response empty array:
+  # -> user.orgs.list
+  # => #<Github::ResponseWrapper @body="[]">
   def organisations
     user = Github.new oauth_token: token, auto_pagination: true
     user.orgs.list.body.map { |org| org[:login]&.downcase }.compact

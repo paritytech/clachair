@@ -4,19 +4,16 @@ class CallbacksController < Devise::OmniauthCallbacksController
   WHITELISTED_ORGS = ENV['ORGANIZATIONS'].split(',').map(&:downcase).freeze
 
   def github
-    auth = request.env['omniauth.auth']
-    user = User.from_omniauth(auth)
+    user = User.from_omniauth(request.env['omniauth.auth'])
 
     if (user.organisations & WHITELISTED_ORGS).any?
       user.save!
       sign_in_and_redirect user
       flash[:notice] = 'Signed in successfully.'
     else
-      redirect_to root_path
-      raise MissingMembershipError
+      flash[:alert] = 'You are not in any of the allowed organisations.'
+      render file: 'public/401', status: :unauthorized
     end
-  rescue MissingMembershipError => error
-    flash[:alert] = error.message
   end
 
   def destroy
