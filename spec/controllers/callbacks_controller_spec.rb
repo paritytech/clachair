@@ -2,8 +2,14 @@ require 'rails_helper'
 
 describe CallbacksController, :omniauth do
   describe '#create' do
+    let(:whitelisted_organisations) { ['test_organisation'] }
+    before do
+      allow_any_instance_of(CallbacksController).to receive(:whitelisted_orgs).and_return(whitelisted_organisations)
+    end
+
     context 'existing user' do
       let(:user) { create :user }
+
       before do
         request.env['omniauth.auth'] = mock_auth(user)
         request.env['devise.mapping'] = Devise.mappings[:user]
@@ -22,9 +28,7 @@ describe CallbacksController, :omniauth do
       end
 
       context 'with valid token and not in whitelisted organisation' do
-        before do
-          stub_const("CallbacksController::WHITELISTED_ORGS", [])
-        end
+        let(:whitelisted_organisations) { ['google', 'microsoft'] }
 
         it "doesn't create a new User object" do
           expect { post :github }.to change{ User.count }.by(0)
@@ -61,9 +65,7 @@ describe CallbacksController, :omniauth do
       end
 
       context 'with valid token and not in whitelisted organisation' do
-        before do
-          stub_const("CallbacksController::WHITELISTED_ORGS", [])
-        end
+        let(:whitelisted_organisations) { ['google', 'microsoft'] }
 
         it "doesn't create a new User object" do
           expect { post :github }.to change{ User.count }.by(0)

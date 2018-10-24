@@ -54,7 +54,6 @@ jobs:
           name: run tests
           environment:
             CC_TEST_REPORTER_ID: bec1103495a56d607073c58e2d46c269dabf0aaf855305928893a5ac73443b4c
-            ORGANIZATIONS: Test_organisation
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
@@ -72,4 +71,3 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
