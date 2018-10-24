@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 feature 'User signed in' do
+  let(:whitelisted_organisations) { ['test_organisation'] }
+  before do
+    allow_any_instance_of(CallbacksController).to receive(:whitelisted_orgs).and_return(whitelisted_organisations)
+  end
+
   context 'new user' do
+    given(:user) { build(:user) }
+
     context 'from whitelisted organisation' do
-      given(:user) { build(:user) }
       scenario 'try to sign in' do
         visit root_path
         mock_auth user
@@ -15,10 +21,9 @@ feature 'User signed in' do
     end
 
     context 'not from whitelisted organisation' do
-      scenario 'try to sign in' do
-        user = build(:user)
-        allow(user).to receive(:organisations).and_return([])
+      let(:whitelisted_organisations) { ['google', 'facebook'] }
 
+      scenario 'try to sign in' do
         visit root_path
         mock_auth user
 
@@ -31,8 +36,9 @@ feature 'User signed in' do
   end
 
   context 'existed user' do
+    given(:user) { create(:user) }
+
     context 'from whitelisted organisation' do
-      given(:user) { create(:user) }
       scenario 'try to sign in' do
         visit root_path
         mock_auth user
@@ -44,9 +50,9 @@ feature 'User signed in' do
     end
 
     context 'not from whitelisted organisation' do
+      let(:whitelisted_organisations) { ['google', 'facebook'] }
+
       scenario 'try to sign in' do
-        user = create(:user)
-        allow(user).to receive(:organisations).and_return([])
         visit root_path
         mock_auth user
 
@@ -58,4 +64,3 @@ feature 'User signed in' do
     end
   end
 end
-
