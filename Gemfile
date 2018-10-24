@@ -49,6 +49,8 @@ group :development, :test do
   gem 'fuubar'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
