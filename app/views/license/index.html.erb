@@ -1,9 +1,9 @@
 <%- if signed_in? && current_user.whitelisted_user? %>
   <h1 align="center"> Hello, <%= current_user.name %> </h1>
 <%- elsif signed_in? && current_user.user? %>
-  <h1 align="center"> Hello, <%= current_user.name %></h1>
+  <h1 align="center"> Hello, <%= current_user.name %>, please read: </h1>
   <br>
-  <p align="center"><%= link_to "Contributor's License Agreement", license_index_path %></p>
+  <%=render 'license' %>
 <%- else %>
   <h1 align="center"> Hello, please <%= link_to 'sign in', user_github_omniauth_authorize_path %> (GitHub) </h1>
 <% end %>
