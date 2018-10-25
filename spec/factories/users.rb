@@ -13,7 +13,7 @@ FactoryBot.define do
     token { 'invalid token' }
   end
 
-  trait(:whitelisted_user) do
-    role { :whitelisted_user }
+  trait(:admin) do
+    role { :admin }
   end
 end

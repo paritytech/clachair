@@ -6,7 +6,7 @@ class CallbacksController < Devise::OmniauthCallbacksController
   def github
     user = User.from_omniauth(request.env['omniauth.auth'])
 
-    user.set_whitelisted_role if (user.organisations & whitelisted_orgs).any?
+    user.role = :admin if (user.organisations & whitelisted_orgs).any?
     user.save!
     sign_in_and_redirect user
     flash[:notice] = 'Signed in successfully.'

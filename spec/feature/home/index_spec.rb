@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'User visited the home page' do
   context 'with role: whitelisted_user' do
-    given(:user) { create(:user, role: :whitelisted_user) }
+    given(:user) { create(:user, role: :admin) }
 
     background do
       logged_in_as user
