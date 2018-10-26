@@ -32,7 +32,7 @@ feature 'User visited the home page' do
 
       expect(page).to have_content("Hello, #{user.name}, please read:")
       expect(page).to have_content("Contributor's License Agreement")
-      expect(page).to have_button("Please sign in with Github to sign")
+      expect(page).to have_button("Please sign")
     end
   end
 

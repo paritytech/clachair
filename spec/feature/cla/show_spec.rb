@@ -6,7 +6,7 @@ feature 'User visited the home page' do
 
     background do
       logged_in_as user
-      visit license_index_path
+      visit cla_path(organisation: 'paritytech', repository: 'parity-bitcoin')
     end
 
     scenario 'and saw greeting' do
@@ -19,19 +19,19 @@ feature 'User visited the home page' do
 
     background do
       logged_in_as user
-      visit license_index_path
+      visit cla_path(organisation: 'paritytech', repository: 'parity-bitcoin')
     end
 
     scenario 'and clicked CLA link' do
       expect(page).to have_content("Hello, #{user.name}, please read:")
       expect(page).to have_content("Contributor's License Agreement")
-      expect(page).to have_button("Please sign in with Github to sign")
+      expect(page).to have_button("Please sign")
     end
   end
 
   context 'without registration' do
     scenario 'and saw sign in link' do
-      visit license_index_path
+      visit cla_path(organisation: 'paritytech', repository: 'parity-bitcoin')
       expect(page).to have_content("Hello, please sign in (GitHub)")
     end
   end
