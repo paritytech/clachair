@@ -6,9 +6,14 @@ FactoryBot.define do
     sequence(:email)  { |i| "email#{i}@example.test" }
     provider  { 'github' }
     token     { 'valid_token' }
+    role      { :user }
   end
 
   trait(:with_invalid_token) do
     token { 'invalid token' }
+  end
+
+  trait(:admin) do
+    role { :admin }
   end
 end
