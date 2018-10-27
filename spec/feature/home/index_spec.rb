@@ -39,7 +39,8 @@ feature 'User visited the home page' do
   context 'without registration' do
     scenario 'and saw sign in link' do
       visit root_path
-      expect(page).to have_content("Hello, please sign in (GitHub)")
+      expect(page).to have_link('sign in (GitHub)')
+      expect(page).to have_link("Contributor's License Agreement")
     end
   end
 end
