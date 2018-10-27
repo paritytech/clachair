@@ -30,9 +30,11 @@ feature 'User visited the home page' do
   end
 
   context 'without registration' do
+    given(:user) { build(:user) }
+
     scenario 'and saw sign in link' do
       visit cla_path(organisation: 'paritytech', repository: 'parity-bitcoin')
-      expect(page).to have_content("Hello, please sign in (GitHub)")
+      expect(page).to have_content("Contributor's License Agreement")
     end
   end
 end
