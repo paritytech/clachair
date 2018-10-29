@@ -43,7 +43,7 @@ gem 'github_api'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
-  gem 'rubocop', '~> 0.59.2', require: false
+  gem 'rubocop', '~> 0.60.0', require: false
   gem 'rubocop-rspec'
   gem 'rspec-rails', '~> 3.8'
   gem 'fuubar'
