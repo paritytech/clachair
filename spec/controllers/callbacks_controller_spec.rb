@@ -4,7 +4,7 @@ describe CallbacksController, :omniauth do
   describe '#create' do
     let(:whitelisted_organisations) { ['test_organisation'] }
     before do
-      stub_const("User::WHITELISTED_ORGS", whitelisted_organisations)
+      stub_const("Organization::WHITELISTED_ORGS", whitelisted_organisations)
     end
 
     context 'existing user' do

@@ -12,6 +12,11 @@ feature 'User visited the home page' do
     scenario 'and saw greeting' do
       expect(page).to have_content("Hello, #{user.name}")
     end
+
+    scenario 'and saw admin interface' do
+      expect(page).to have_button('Update information')
+      expect(page).to have_link('Organizations')
+    end
   end
 
   context 'with role: user' do
@@ -33,6 +38,11 @@ feature 'User visited the home page' do
       expect(page).to have_content("Hello, #{user.name}, please read:")
       expect(page).to have_content("Contributor's License Agreement")
       expect(page).to have_button("Please sign")
+    end
+
+    scenario 'and does not saw admin interface' do
+      expect(page).not_to have_button('Update information')
+      expect(page).not_to have_link('Organizations')
     end
   end
 

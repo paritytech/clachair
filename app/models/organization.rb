@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Organization < ApplicationRecord
+  WHITELISTED_ORGS = (ENV['ORGANIZATIONS'] || '').split(',').map(&:downcase).freeze
+
   validates :login, :uid, presence: true, uniqueness: true
 
   has_many :repositories, dependent: :destroy
@@ -10,5 +12,9 @@ class Organization < ApplicationRecord
     organization.github_url = org.html_url
     organization.name       = org.name
     organization
+  end
+
+  def self.whitelisted_orgs
+    WHITELISTED_ORGS
   end
 end

@@ -2,6 +2,7 @@
 
 class RepositoriesController < ApplicationController
   def show
-    @repository = Repository.find(params[:id])
+    @repository = authorize Repository.find(params[:id])
+    @organization = authorize Organization.find(@repository.organization_id)
   end
 end

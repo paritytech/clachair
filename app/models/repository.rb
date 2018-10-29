@@ -3,7 +3,7 @@
 class Repository < ApplicationRecord
   validates :uid, presence: true, uniqueness: true
 
-  scope :without_license, -> { where(license_name: nil) }
+  scope :without_license, -> { where(spdx_id: nil) }
 
   def self.from_github_api(id, repo)
     repository            = where(organization_id: id, uid: repo.id).first_or_initialize
@@ -13,8 +13,8 @@ class Repository < ApplicationRecord
     license               = repo.license
 
     if license
-      repository.license_spdx_id  = license.spdx_id
-      repository.license_name     = license.name
+      repository.spdx_id      = license.spdx_id
+      repository.license_name = license.name
     end
 
     repository

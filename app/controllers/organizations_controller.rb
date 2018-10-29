@@ -2,10 +2,10 @@
 
 class OrganizationsController < ApplicationController
   def index
-    @organizations = Organization.all
+    @organizations = authorize Organization.all
   end
 
   def show
-    @organization = Organization.find(params[:id])
+    @organization = authorize Organization.find(params[:id])
   end
 end

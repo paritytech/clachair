@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 2018_10_28_093455) do
     t.string "github_url"
     t.string "desc"
     t.string "license_name"
-    t.string "license_spdx_id"
+    t.string "spdx_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["organization_id", "uid", "name"], name: "index_repositories_on_organization_id_and_uid_and_name", unique: true
+    t.index ["organization_id", "uid", "spdx_id"], name: "index_repositories_on_organization_id_and_uid_and_spdx_id", unique: true
     t.index ["organization_id"], name: "index_repositories_on_organization_id"
   end
 

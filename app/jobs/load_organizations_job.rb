@@ -7,8 +7,6 @@ class LoadOrganizationsJob < ApplicationJob
     load_organizations
   end
 
-  private
-
   def load_organizations
     User.whitelisted_orgs.each do |org|
       organization = Organization.from_github_api(Github.new.orgs.get(org))

@@ -7,8 +7,6 @@ class LoadRepositoriesJob < ApplicationJob
     load_repositories(organization)
   end
 
-  private
-
   def load_repositories(organization)
     org_repos = Github.new.repos.list user: organization.login
     return if org_repos.body.empty?

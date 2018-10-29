@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  WHITELISTED_ORGS = (ENV['ORGANIZATIONS'] || '').split(',').map(&:downcase).freeze
-
   devise :rememberable, :omniauthable, omniauth_providers: [:github]
   enum role: { user: 0, admin: 100 }
 
@@ -28,10 +26,6 @@ class User < ApplicationRecord
   end
 
   def self.role_for(user)
-    (user.organisations & whitelisted_orgs).any? ? :admin : :user
-  end
-
-  def self.whitelisted_orgs
-    WHITELISTED_ORGS
+    (user.organisations & Organization.whitelisted_orgs).any? ? :admin : :user
   end
 end
