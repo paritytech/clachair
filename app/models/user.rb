@@ -8,9 +8,9 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize(
-      email:  auth.info.email,
-      name:   auth.info.name,
-      login:  auth.extra.raw_info.login
+      email: auth.info.email,
+      name: auth.info.name,
+      login: auth.extra.raw_info.login
     )
     user.token  = auth.credentials.token
     user.role   = role_for user

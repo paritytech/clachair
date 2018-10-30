@@ -7,11 +7,17 @@ class Organization < ApplicationRecord
 
   has_many :repositories, dependent: :destroy
 
-  def self.from_github_api(org)
-    organization = where(uid: org.id, login: org.login).first_or_initialize
-    organization.github_url = org.html_url
-    organization.name       = org.name
-    organization
+  def self.load_organizations
+    whitelisted_orgs.each do |whitelisted_org|
+      org = Github.new.orgs.get(whitelisted_org)
+
+      organization = where(uid: org.id, login: org.login).first_or_initialize
+      organization.github_url = org.html_url
+      organization.name       = org.name
+      organization.save!
+
+      LoadRepositoriesJob.perform_later(organization)
+    end
   end
 
   def self.whitelisted_orgs
