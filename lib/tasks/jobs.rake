@@ -3,6 +3,6 @@
 namespace :jobs do
   desc 'load organizations from github'
   task load_organizations: :environment do
-    LoadOrganizationsJob.new.perform_later
+    LoadOrganizationsJob.perform_later
   end
 end

@@ -17,7 +17,7 @@ feature 'User visited the organisations page' do
       expect(page).to have_content(repository.name)
       expect(page).to have_content(repository.desc)
       expect(page).to have_content(repository.license_name)
-      expect(page).to have_content(repository.spdx_id)
+      expect(page).to have_content(repository.license_spdx_id)
     end
   end
 
@@ -36,7 +36,7 @@ feature 'User visited the organisations page' do
       expect(page).to_not have_content(repository.name)
       expect(page).to_not have_content(repository.desc)
       expect(page).to_not have_content(repository.license_name)
-      expect(page).to_not have_content(repository.spdx_id)
+      expect(page).to_not have_content(repository.license_spdx_id)
       expect(page).to have_content('You are not authorized for this action')
     end
   end

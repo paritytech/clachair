@@ -12,8 +12,9 @@ feature 'User visited the organisations page' do
     end
 
     scenario 'and saw repositories links' do
-      expect(page).to have_link(organization.repositories.first.name)
-      expect(page).to have_link(organization.repositories.fifth.name)
+      organization.repositories.each do |repository|
+        expect(page).to have_link(repository.name)
+      end
     end
   end
 
@@ -26,8 +27,10 @@ feature 'User visited the organisations page' do
     end
 
     scenario 'and does not saw repositories links' do
-      expect(page).to_not have_link(organization.repositories.first.name)
-      expect(page).to_not have_link(organization.repositories.fifth.name)
+      organization.repositories.each do |repository|
+        expect(page).to_not have_link(repository.name)
+      end
+
       expect(page).to have_content('You are not authorized for this action')
     end
   end
@@ -38,8 +41,10 @@ feature 'User visited the organisations page' do
     end
 
     scenario 'and does not saw repositories links' do
-      expect(page).to_not have_link(organization.repositories.first.name)
-      expect(page).to_not have_link(organization.repositories.fifth.name)
+      organization.repositories.each do |repository|
+        expect(page).to_not have_link(repository.name)
+      end
+
       expect(page).to have_content('You are not authorized for this action')
     end
   end

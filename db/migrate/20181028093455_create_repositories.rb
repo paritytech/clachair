@@ -7,11 +7,12 @@ class CreateRepositories < ActiveRecord::Migration[5.2]
       t.string :github_url
       t.string :desc
       t.string :license_name
-      t.string :spdx_id
+      t.string :license_spdx_id
 
       t.timestamps
     end
 
-    add_index(:repositories, [:organization_id, :uid, :spdx_id], unique: true)
+    add_index(:repositories, [:organization_id, :uid], unique: true)
+    add_index(:repositories, :license_spdx_id)
   end
 end

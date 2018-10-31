@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-10 offset-1">
+  <div class="col-8 offset-2">
     <h2 align="center">
       <strong><%= @organization.name %></strong> repositories list:
     </h2>
@@ -14,7 +14,7 @@
       </thead>
       <tbody>
       <%- @organization.repositories.each do |repository| %>
-        <%- if repository.spdx_id.nil? %>
+        <%- if repository.license_spdx_id.nil? %>
           <tr class="table-danger">
             <td><%= link_to repository.name, repository_path(repository) %></td>
             <td>No license</td>
@@ -24,13 +24,13 @@
           <tr class="table-warning">
             <td><%= link_to repository.name, repository_path(repository) %></td>
             <td><%= repository.license_name %></td>
-            <td><%= repository.spdx_id %></td>
+            <td><%= repository.license_spdx_id %></td>
           </tr>
         <%- else %>
           <tr>
             <td><%= link_to repository.name, repository_path(repository) %></td>
             <td><%= repository.license_name %></td>
-            <td><%= repository.spdx_id %></td>
+            <td><%= repository.license_spdx_id %></td>
           </tr>
         <% end %>
       <% end %>
