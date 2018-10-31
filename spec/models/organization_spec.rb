@@ -9,19 +9,14 @@ RSpec.describe Organization, type: :model do
 
   describe 'load_organizations' do
     context 'creates new organization' do
-      let(:whitelisted_organisations) { [ 'test-organization'] }
+      let(:whitelisted_organisations) { ['test-organization'] }
+
       before do
         stub_const("Organization::WHITELISTED_ORGS", whitelisted_organisations)
       end
 
-      before do
-        Organization.load_organizations
-      end
-
-      it 'create a new Repository record' do
-        Organization.all.each do |organization|
-          expect(organization.login).to eq('test-organization')
-        end
+      it 'create a new Organization record' do
+        expect { Organization.load_organizations }.to change{ Organization.count }.by(1)
       end
     end
   end

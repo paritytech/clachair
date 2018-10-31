@@ -6,20 +6,12 @@ RSpec.describe Repository, type: :model do
 
   describe 'load_repositories' do
     context 'creates new repo' do
-      let(:organization) { create :organization, login: 'test-organization'  }
+      let(:organization) { create :organization, login: 'test-organization' }
 
-      before do
-        Repository.load_repositories(organization)
-      end
+      subject { Repository.load_repositories(organization) }
 
-      it 'create a new Repository record' do
-        organization.repositories.each do |repository|
-          expect(repository.organization_id).to eq organization.id
-        end
-      end
-
-      it 'changed count repositories after create' do
-        expect(Repository.count).to eq organization.repositories.count
+      it 'creates a new Repository record' do
+        expect{ subject }.to change{ Repository.count }.by(1)
       end
     end
   end

@@ -25,6 +25,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 OmniAuth.config.test_mode = true
+ActiveJob::Base.queue_adapter = :test
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
