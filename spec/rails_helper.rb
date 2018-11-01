@@ -27,6 +27,10 @@ end
 OmniAuth.config.test_mode = true
 ActiveJob::Base.queue_adapter = :test
 
+VCR.configure do |config|
+  config.default_cassette_options = { allow_playback_repeats: true }
+end
+
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
