@@ -39,11 +39,13 @@ RSpec.describe Organization, type: :model do
     end
 
     context 'call LoadRepositoriesJob after create organization' do
-      let(:organization){ create(:organization, :with_repositories, count: 5) }
-      subject(:job) { LoadRepositoriesJob.perform_later(organization.repositories.count) }
+      before do
+        allow(LoadRepositoriesJob).to receive(:perform_later)
+        Organization.load_organizations
+      end
 
       it 'call LoadRepositoriesJob' do
-        expect { job }.to have_enqueued_job(LoadRepositoriesJob).with(organization.repositories.count).on_queue('default')
+        expect(LoadRepositoriesJob).to have_received(:perform_later)
       end
     end
   end
