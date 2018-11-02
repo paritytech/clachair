@@ -1,0 +1,72 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/users/test-organization/repos
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 31 Oct 2018 18:29:37 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '59'
+      X-Ratelimit-Reset:
+      - '1541014177'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - W/"08702db0fcbddef6d9cc3167b438ab09"
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - D626:7C85:76283D:F1D2E0:5BD9F490
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"id":27539416,"node_id":"MDEwOlJlcG9zaXRvcnkyNzUzOTQxNg==","name":"repo","full_name":"Test-Organization/repo","private":false,"owner":{"login":"Test-Organization","id":10074406,"node_id":"MDEyOk9yZ2FuaXphdGlvbjEwMDc0NDA2","avatar_url":"https://avatars3.githubusercontent.com/u/10074406?v=4","gravatar_id":"","url":"https://api.github.com/users/Test-Organization","html_url":"https://github.com/Test-Organization","followers_url":"https://api.github.com/users/Test-Organization/followers","following_url":"https://api.github.com/users/Test-Organization/following{/other_user}","gists_url":"https://api.github.com/users/Test-Organization/gists{/gist_id}","starred_url":"https://api.github.com/users/Test-Organization/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/Test-Organization/subscriptions","organizations_url":"https://api.github.com/users/Test-Organization/orgs","repos_url":"https://api.github.com/users/Test-Organization/repos","events_url":"https://api.github.com/users/Test-Organization/events{/privacy}","received_events_url":"https://api.github.com/users/Test-Organization/received_events","type":"Organization","site_admin":false},"html_url":"https://github.com/Test-Organization/repo","description":null,"fork":false,"url":"https://api.github.com/repos/Test-Organization/repo","forks_url":"https://api.github.com/repos/Test-Organization/repo/forks","keys_url":"https://api.github.com/repos/Test-Organization/repo/keys{/key_id}","collaborators_url":"https://api.github.com/repos/Test-Organization/repo/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/Test-Organization/repo/teams","hooks_url":"https://api.github.com/repos/Test-Organization/repo/hooks","issue_events_url":"https://api.github.com/repos/Test-Organization/repo/issues/events{/number}","events_url":"https://api.github.com/repos/Test-Organization/repo/events","assignees_url":"https://api.github.com/repos/Test-Organization/repo/assignees{/user}","branches_url":"https://api.github.com/repos/Test-Organization/repo/branches{/branch}","tags_url":"https://api.github.com/repos/Test-Organization/repo/tags","blobs_url":"https://api.github.com/repos/Test-Organization/repo/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/Test-Organization/repo/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/Test-Organization/repo/git/refs{/sha}","trees_url":"https://api.github.com/repos/Test-Organization/repo/git/trees{/sha}","statuses_url":"https://api.github.com/repos/Test-Organization/repo/statuses/{sha}","languages_url":"https://api.github.com/repos/Test-Organization/repo/languages","stargazers_url":"https://api.github.com/repos/Test-Organization/repo/stargazers","contributors_url":"https://api.github.com/repos/Test-Organization/repo/contributors","subscribers_url":"https://api.github.com/repos/Test-Organization/repo/subscribers","subscription_url":"https://api.github.com/repos/Test-Organization/repo/subscription","commits_url":"https://api.github.com/repos/Test-Organization/repo/commits{/sha}","git_commits_url":"https://api.github.com/repos/Test-Organization/repo/git/commits{/sha}","comments_url":"https://api.github.com/repos/Test-Organization/repo/comments{/number}","issue_comment_url":"https://api.github.com/repos/Test-Organization/repo/issues/comments{/number}","contents_url":"https://api.github.com/repos/Test-Organization/repo/contents/{+path}","compare_url":"https://api.github.com/repos/Test-Organization/repo/compare/{base}...{head}","merges_url":"https://api.github.com/repos/Test-Organization/repo/merges","archive_url":"https://api.github.com/repos/Test-Organization/repo/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/Test-Organization/repo/downloads","issues_url":"https://api.github.com/repos/Test-Organization/repo/issues{/number}","pulls_url":"https://api.github.com/repos/Test-Organization/repo/pulls{/number}","milestones_url":"https://api.github.com/repos/Test-Organization/repo/milestones{/number}","notifications_url":"https://api.github.com/repos/Test-Organization/repo/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/Test-Organization/repo/labels{/name}","releases_url":"https://api.github.com/repos/Test-Organization/repo/releases{/id}","deployments_url":"https://api.github.com/repos/Test-Organization/repo/deployments","created_at":"2014-12-04T12:26:31Z","updated_at":"2014-12-04T12:26:31Z","pushed_at":"2014-12-04T12:26:31Z","git_url":"git://github.com/Test-Organization/repo.git","ssh_url":"git@github.com:Test-Organization/repo.git","clone_url":"https://github.com/Test-Organization/repo.git","svn_url":"https://github.com/Test-Organization/repo","homepage":null,"size":0,"stargazers_count":0,"watchers_count":0,"language":null,"has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"open_issues_count":0,"license":null,"forks":0,"open_issues":0,"watchers":0,"default_branch":"master"}]'
+    http_version: 
+  recorded_at: Wed, 31 Oct 2018 18:29:37 GMT
+recorded_with: VCR 4.0.0

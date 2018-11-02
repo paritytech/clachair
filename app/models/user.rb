@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  WHITELISTED_ORGS = (ENV['ORGANIZATIONS'] || '').split(',').map(&:downcase).freeze
-
   devise :rememberable, :omniauthable, omniauth_providers: [:github]
   enum role: { user: 0, admin: 100 }
 
@@ -10,9 +8,9 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize(
-      email:  auth.info.email,
-      name:   auth.info.name,
-      login:  auth.extra.raw_info.login
+      email: auth.info.email,
+      name: auth.info.name,
+      login: auth.extra.raw_info.login
     )
     user.token  = auth.credentials.token
     user.role   = role_for user
@@ -28,10 +26,6 @@ class User < ApplicationRecord
   end
 
   def self.role_for(user)
-    (user.organisations & whitelisted_orgs).any? ? :admin : :user
-  end
-
-  def self.whitelisted_orgs
-    WHITELISTED_ORGS
+    (user.organisations & Organization.whitelisted_orgs).any? ? :admin : :user
   end
 end

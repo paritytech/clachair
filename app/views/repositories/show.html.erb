@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-8 offset-2">
+    <div class="card border-dark">
+      <div class="card-header text-center">
+        Repository GitHub name:  <h3><%= @repository.name %></h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-10 offset-1">
+            <h5 class="card-title"><u></u>Repository License:</h5>
+            <p class="card-text">
+              <u>
+                <%= @repository.license_name %>
+              </u>
+            </p>
+
+            <h5 class="card-title">Repository License Spdx id:</h5>
+            <p class="card-text">
+              <u>
+                <%= @repository.license_spdx_id %>
+              </u>
+            </p>
+
+            <h5 class="card-title">Description:</h5>
+            <p class="card-text">
+              <u>
+                <%= @repository.desc %>
+              </u>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer  text-center">
+        <div class="btn-group " role="group">
+          <%= link_to 'View CLA', cla_path(organisation: @organization, repository: @repository), class: 'btn btn-outline-info' %>
+          <%= link_to 'go to Github page', @repository.github_url, class: 'btn btn-outline-info', target: '_blank' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="row">
+ <div class="col-8 offset-2">
+   <h1 align="center">Organizations list:</h1>
+   <ul class="list-group">
+     <%- @organizations.each do |organization| %>
+       <li class="list-group-item d-flex justify-content-between align-items-center">
+         <%= link_to organization.name, organization_path(organization) %>
+         <div>
+           <% repositories_without_license = organization.repositories.without_license.count %>
+           <%- if repositories_without_license > 0 %>
+             <span class="badge badge-danger">
+               <%= repositories_without_license %>
+             </span>
+           <% end %>
+           <span class="badge badge-primary">
+             <%= organization.repositories.count%>
+           </span>
+         </div>
+       </li>
+     <% end %>
+   </ul>
+ </div>
+</div>
+

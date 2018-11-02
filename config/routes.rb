@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root  'home#index'
   get 'cla/:organisation/:repository' => 'cla#show', as: :cla
 
+  resources :organizations, only: [:index, :show]
+  resources :repositories, only: [:show]
+
   devise_scope :user do
     delete 'destroy_user_session' => 'callbacks#destroy'
   end
