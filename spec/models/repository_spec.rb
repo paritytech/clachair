@@ -16,36 +16,33 @@ RSpec.describe Repository, type: :model do
 
     context 'updates repository' do
       it 'updates fields if they were changed' do
-        organization = create :organization, login: 'test-organization'
+        organization = create(:organization,
+                              login: 'test-organization',
+                              uid: '12345678',
+                              name: 'old_name',
+                              github_url: 'https://github.com/old_organization_url')
+
+        create(:repository,
+               organization_id: organization.id,
+               uid: '87654321',
+               name: 'old_name',
+               github_url: 'https://github.com/old_repository_url',
+               desc: 'old_description',
+               license_spdx_id: nil,
+               license_name: nil)
 
         Repository.load_repositories(organization)
+        expect(organization.repositories.count).to eq(1)
 
-        repository = Organization.find_by_login('test-organization').repositories.first
-        repository.name = 'old_name'
-        repository.github_url = 'https://github.com/old_repository_url'
-        repository.desc = 'old_description'
-        repository.license_spdx_id = 'old_license_spdx_id'
-        repository.license_name = 'old_license_name'
-        repository.save!
+        repository = organization.repositories.first
 
-        Repository.load_repositories(organization)
-        updated_repository = Organization.find_by_login('test-organization').repositories.first
-
-        expect{ repository.reload }.to change { repository.name }
-                                         .from('old_name')
-                                         .to(updated_repository.name)
-                                         .and change { repository.github_url }
-                                                .from('https://github.com/old_repository_url')
-                                                .to(updated_repository.github_url)
-                                                .and change { repository.desc }
-                                                       .from('old_description')
-                                                       .to(updated_repository.desc)
-                                                       .and change { repository.license_spdx_id }
-                                                              .from('old_license_spdx_id')
-                                                              .to(updated_repository.license_spdx_id)
-                                                              .and change { repository.license_name }
-                                                                     .from('old_license_name')
-                                                                     .to(updated_repository.license_name)
+        expect(repository.organization_id).to eq(organization.id)
+        expect(repository.uid).to eq('87654321')
+        expect(repository.name).to eq('test-repo')
+        expect(repository.github_url).to eq('https://github.com/Test-Organization/test-repo')
+        expect(repository.desc).to eq(nil)
+        expect(repository.license_spdx_id).to eq('test_license')
+        expect(repository.license_name).to eq('Test License')
       end
     end
   end

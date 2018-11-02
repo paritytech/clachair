@@ -13,40 +13,31 @@ RSpec.describe Organization, type: :model do
       stub_const("Organization::WHITELISTED_ORGS", whitelisted_organisations)
     end
 
-    context 'creates new organization' do
-      it 'create a new Organization record' do
-        expect { Organization.load_organizations }.to change{ Organization.count }.by(1)
-      end
+    it 'create a new Organization record' do
+      expect { Organization.load_organizations }.to change{ Organization.count }.by(1)
     end
 
-    context 'updates organization' do
-      it 'updates fields if they were changed' do
-        Organization.load_organizations
-        organization = Organization.find_by_login('test-organization')
-        organization.name = 'old_name'
-        organization.github_url = 'https://github.com/old_organization_url'
-        organization.save!
-        Organization.load_organizations
-        updated_organization = Organization.find_by_login('test-organization')
+    it 'updates fields if they were changed' do
+      create(:organization,
+             login: 'test-organization',
+             uid: '12345678',
+             name: 'old_name',
+             github_url: 'https://github.com/old_organization_url')
 
-        expect{ organization.reload }.to change { organization.name }
-                                           .from('old_name')
-                                           .to(updated_organization.name)
-                                           .and change { organization.github_url }
-                                                  .from('https://github.com/old_organization_url')
-                                                  .to(updated_organization.github_url)
-      end
+      Organization.load_organizations
+      expect(Organization.count).to eq(1)
+      organization = Organization.first
+
+      expect(organization.login).to eq('test-organization')
+      expect(organization.uid).to eq('12345678')
+      expect(organization.name).to eq('New Organization Name')
+      expect(organization.github_url).to eq('https://github.com/test-organization')
     end
 
-    context 'call LoadRepositoriesJob after create organization' do
-      before do
-        allow(LoadRepositoriesJob).to receive(:perform_later)
+    it 'queues the job' do
+      expect {
         Organization.load_organizations
-      end
-
-      it 'call LoadRepositoriesJob' do
-        expect(LoadRepositoriesJob).to have_received(:perform_later)
-      end
+      }.to have_enqueued_job(LoadRepositoriesJob).with(Organization.first)
     end
   end
 end
