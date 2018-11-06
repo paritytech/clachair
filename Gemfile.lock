@@ -79,8 +79,7 @@ GEM
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     coderay (1.1.2)
-    concurrent-ruby (1.0.5)
-    concurrent-ruby (1.0.5-java)
+    concurrent-ruby (1.1.1)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
@@ -134,7 +133,7 @@ GEM
     io-like (0.3.0)
     jaro_winkler (1.5.1)
     jaro_winkler (1.5.1-java)
-    jbuilder (2.7.0)
+    jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     jquery-rails (4.3.3)
@@ -381,7 +380,7 @@ DEPENDENCIES
   factory_bot_rails
   fuubar
   github_api
-  jbuilder (~> 2.5)
+  jbuilder (~> 2.8)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
   omniauth-github
