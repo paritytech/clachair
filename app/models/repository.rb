@@ -5,6 +5,8 @@ class Repository < ApplicationRecord
 
   scope :without_license, -> { where(license_spdx_id: nil) }
 
+  belongs_to :cla, optional: true
+
   def self.load_repositories(organization)
     org_repos = Github.new.repos.list user: organization.login
     return if org_repos.body.empty?

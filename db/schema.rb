@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_093455) do
+ActiveRecord::Schema.define(version: 2018_11_06_050201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -50,6 +56,8 @@ ActiveRecord::Schema.define(version: 2018_10_28_093455) do
     t.string "license_spdx_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cla_id"
+    t.index ["cla_id"], name: "index_repositories_on_cla_id"
     t.index ["license_spdx_id"], name: "index_repositories_on_license_spdx_id"
     t.index ["organization_id", "uid"], name: "index_repositories_on_organization_id_and_uid", unique: true
     t.index ["organization_id"], name: "index_repositories_on_organization_id"
@@ -68,4 +76,5 @@ ActiveRecord::Schema.define(version: 2018_10_28_093455) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "repositories", "clas"
 end

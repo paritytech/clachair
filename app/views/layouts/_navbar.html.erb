@@ -9,9 +9,7 @@
         <%- if signed_in? %>
           <%- if current_user.admin? %>
             <li class="nav-item">
-              <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
-                Update information
-              </button>
+              <%= link_to 'CLAs', clas_path, class: 'nav-link' %>
             </li>
             <li class="nav-item">
               <%= link_to 'Organizations', organizations_path, class: 'nav-link' %>

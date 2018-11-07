@@ -1,8 +1,20 @@
 # frozen_string_literal: true
 
 class RepositoriesController < ApplicationController
+  before_action :set_repository, only: %i[show update]
+
   def show
-    @repository = authorize Repository.find(params[:id])
     @organization = authorize Organization.find(@repository.organization_id)
+  end
+
+  def update
+    @repository.update(cla_id: params[:repository][:cla_id])
+    redirect_to @repository
+  end
+
+  private
+
+  def set_repository
+    @repository = authorize Repository.find(params[:id])
   end
 end

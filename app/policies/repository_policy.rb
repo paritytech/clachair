@@ -11,4 +11,8 @@ class RepositoryPolicy
   def show?
     @current_user&.admin?
   end
+
+  def update?
+    @current_user&.admin?
+  end
 end
