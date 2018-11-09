@@ -13,7 +13,7 @@ feature 'User visited the home page' do
     scenario 'and saw organisation link' do
       organization
       visit organizations_path
-      expect(page).to have_button('Update organizations')
+      expect(page).to have_link('Load Organizations')
       expect(page).to have_link(organization.name)
       expect(page).to have_css('.badge.badge-primary', text: 5)
     end
@@ -30,7 +30,7 @@ feature 'User visited the home page' do
       organization
       visit organizations_path
       expect(page).not_to have_link(organization.name)
-      expect(page).not_to have_button('Update organizations')
+      expect(page).not_to have_link('Load Organizations')
       expect(page).to have_content('You are not authorized for this action')
     end
   end
@@ -40,7 +40,7 @@ feature 'User visited the home page' do
       organization
       visit organizations_path
       expect(page).not_to have_link(organization.name)
-      expect(page).not_to have_button('Update organizations')
+      expect(page).not_to have_link('Load Organizations')
       expect(page).to have_content('You are not authorized for this action')
     end
   end

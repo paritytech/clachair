@@ -28,6 +28,13 @@
                 <%= link_to @repository.name, @repository.github_url, target: '_blank' %>
               </u>
             </p>
+            <%- if @repository.cla_id? %>
+              <hr>
+              <h5 class="card-title">CLA url:</h5>
+              <p class="card-text">
+                <%= link_to @cla.name, cla_repository_path(@repository, @repository.cla_id)  %>
+              </p>
+            <% end %>
             <hr>
             <h5 class="card-title text-center">CLA:</h5>
             <p class="card-text">

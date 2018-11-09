@@ -19,7 +19,6 @@ class ClasController < ApplicationController
       redirect_to @cla
       flash[:notice] = 'CLA has been created!'
     else
-      flash.now[:alert] = "CLA couldn't be created! Please check the form."
       render :new
     end
   end
@@ -31,6 +30,6 @@ class ClasController < ApplicationController
   end
 
   def set_cla
-    @cla = Cla.find(params[:id])
+    @cla = authorize Cla.find(params[:cla_id] || params[:id])
   end
 end

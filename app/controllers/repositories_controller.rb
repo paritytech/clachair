@@ -5,6 +5,9 @@ class RepositoriesController < ApplicationController
 
   def show
     @organization = authorize Organization.find(@repository.organization_id)
+
+    cla_id = @repository.cla_id
+    @cla = authorize Cla.find(cla_id) if cla_id
   end
 
   def update

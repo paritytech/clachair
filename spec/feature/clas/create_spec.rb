@@ -20,6 +20,6 @@ feature 'Whitelisted user creates CLA' do
   scenario 'with empty field' do
     click_on 'Create CLA'
 
-    expect(page).to have_content("CLA couldn't be created! Please check the form.")
+    expect(page).to have_content("Name can't be blank")
   end
 end

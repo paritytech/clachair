@@ -25,7 +25,11 @@ feature 'User visited the repository page' do
 
       visit repository_path(repository)
       expect(page).to have_select 'repository_cla_id', with_options: [cla.name, another_cla.name]
-      expect(page).to have_button('Update Repository')
+      select(another_cla.name).select_option
+      click_on('Update Repository')
+
+      expect(page).to have_link(another_cla.name)
+      expect(page).to have_select 'repository_cla_id', visible: another_cla.name
     end
   end
 

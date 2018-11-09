@@ -3,9 +3,10 @@ require 'rails_helper'
 feature 'User visited the show page' do
   context 'all users can see CLA' do
     given(:cla) { create(:cla) }
+    given(:repository) { create(:repository, cla: cla) }
 
     background do
-      visit cla_path(cla)
+      visit cla_repository_path(repository, repository.cla_id)
     end
 
     scenario 'and saw CLA name' do

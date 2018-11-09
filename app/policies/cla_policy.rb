@@ -9,7 +9,7 @@ class ClaPolicy
   end
 
   def index?
-    @current_user&.admin?
+    admin?
   end
 
   def show?
@@ -17,10 +17,16 @@ class ClaPolicy
   end
 
   def new?
-    create?
+    admin?
   end
 
   def create?
+    admin?
+  end
+
+  private
+
+  def admin?
     @current_user&.admin?
   end
 end
