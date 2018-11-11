@@ -23,6 +23,10 @@ class ClasController < ApplicationController
     end
   end
 
+  def display
+    @cla = Repository.find_by(organization_id: params[:organization], id: params[:repository]).cla
+  end
+
   private
 
   def cla_params
@@ -30,6 +34,6 @@ class ClasController < ApplicationController
   end
 
   def set_cla
-    @cla = authorize Cla.find(params[:cla_id] || params[:id])
+    @cla = authorize Cla.find(params[:id])
   end
 end

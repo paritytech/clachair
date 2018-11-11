@@ -9,7 +9,7 @@ class OrganizationsController < ApplicationController
     @organization = authorize Organization.find(params[:id])
   end
 
-  def load_organizations
+  def trigger_refresh
     authorize LoadOrganizationsJob.perform_later
     redirect_to organizations_path
     flash[:notice] = 'Loading organizations and repositories...'

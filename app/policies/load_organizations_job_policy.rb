@@ -8,7 +8,7 @@ class LoadOrganizationsJobPolicy
     @organization = organization
   end
 
-  def load_organizations?
+  def trigger_refresh?
     admin?
   end
 

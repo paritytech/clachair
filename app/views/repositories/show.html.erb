@@ -32,7 +32,7 @@
               <hr>
               <h5 class="card-title">CLA url:</h5>
               <p class="card-text">
-                <%= link_to @cla.name, cla_repository_path(@repository, @repository.cla_id)  %>
+                <%= link_to @cla.name, cla_repository_path(@repository.organization_id, @repository)  %>
               </p>
             <% end %>
             <hr>
