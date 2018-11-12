@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :repositories, only: [:show, :update]
 
   resources :clas, except: [:destroy]
+  # resources :cla_versions
 
   devise_scope :user do
     delete 'destroy_user_session' => 'callbacks#destroy'

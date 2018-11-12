@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
 class ClasController < ApplicationController
-  before_action :set_cla, only: [:show]
+  before_action :set_cla, only: %i[show edit update]
 
   def index
     @clas = authorize Cla.all
   end
 
   def show; end
+
+  def display
+    @cla = Repository.find_by(organization_id: params[:organization], id: params[:repository]).cla
+  end
 
   def new
     @cla = authorize Cla.new
@@ -16,6 +20,7 @@ class ClasController < ApplicationController
   def create
     @cla = authorize Cla.new(cla_params)
     if @cla.save
+      new_cla_version(@cla.id, params[:cla][:cla_version][:license_text])
       redirect_to @cla
       flash[:notice] = 'CLA has been created!'
     else
@@ -23,11 +28,24 @@ class ClasController < ApplicationController
     end
   end
 
-  def display
-    @cla = Repository.find_by(organization_id: params[:organization], id: params[:repository]).cla
+  def edit; end
+
+  def update
+    if @cla.update(cla_params)
+      new_cla_version(@cla.id, params[:cla][:cla_version][:license_text])
+      redirect_to @cla
+      flash[:notice] = 'CLA has been updated!'
+    else
+      render :edit
+    end
   end
 
   private
+
+  def new_cla_version(cla_id, license_text)
+    cla_version = ClaVersion.new(cla_id: cla_id, license_text: license_text)
+    cla_version.save!
+  end
 
   def cla_params
     params.require(:cla).permit(:name)

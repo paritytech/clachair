@@ -13,7 +13,11 @@ class ClaPolicy
   end
 
   def show?
-    true
+    admin?
+  end
+
+  def display?
+    admin?
   end
 
   def new?
@@ -21,6 +25,14 @@ class ClaPolicy
   end
 
   def create?
+    admin?
+  end
+
+  def edit?
+    admin?
+  end
+
+  def update?
     admin?
   end
 

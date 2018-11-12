@@ -1,19 +1,7 @@
-<h2 align="center"> Hello, please read and sign: </h2>
+<h2 align="center"> Hello, <%= current_user.name %>!</h2>
 
-<h1 align="center"><%= @cla.name %></h1>
-
-<div align="center">
-  <p>
-    <button type="button" class="btn btn-success">
-      Sign this CLA
-    </button>
-  </p>
-  <br>
-  <hr>
-  <p>
-    <em>
-      Copyright <%= DateTime.now.year %> Parity Technologies. All Rights Reserved.
-    </em>
-  </p>
-  <br>
-</div>
+<%= render 'license', cla: @cla %>
+<br>
+<p align="center">
+  <%= link_to 'edit', edit_cla_path(@cla), class: 'btn btn-outline-info my-2 my-sm-0' %>
+</p>
