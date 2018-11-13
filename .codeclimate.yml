@@ -10,3 +10,5 @@ engines:
     checks:
       Rubocop/Style/Documentation:
         enabled: false
+      Rubocop/Style/StringLiterals:
+        enabled: false
