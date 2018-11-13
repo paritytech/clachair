@@ -3,13 +3,12 @@ Rails.application.routes.draw do
   root  'home#index'
 
   post 'trigger_refresh' => 'organizations#trigger_refresh'
-  get  '/cla/:organization/:repository', to: 'clas#display', as: :cla_repository
+  get  '/cla/:organization/:repository', to: 'clas#display_for_signing', as: :cla_repository
 
   resources :organizations, only: [:index, :show]
   resources :repositories, only: [:show, :update]
 
   resources :clas, except: [:destroy]
-  # resources :cla_versions
 
   devise_scope :user do
     delete 'destroy_user_session' => 'callbacks#destroy'

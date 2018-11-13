@@ -1,7 +1,15 @@
-<h2 align="center"> Hello, <%= current_user.name %>!</h2>
-
-<%= render 'license', cla: @cla %>
-<br>
-<p align="center">
-  <%= link_to 'edit', edit_cla_path(@cla), class: 'btn btn-outline-info my-2 my-sm-0' %>
-</p>
+<div class="row">
+<div class="col-8">
+<%= render 'license', cla: @cla, cla_version: @cla_version %>
+</div>
+  <div class="col-3 offset-1">
+    <p class="navbar-brand">Revisions
+    <%= link_to 'Add new', edit_cla_path(@cla), class: 'btn btn-outline-info my-2 my-sm-0' %>
+    </p>
+    <nav class="nav nav-pills flex-column">
+      <% @cla.versions.each do |version| %> 
+        <%= link_to version.created_at, { version: version.id }, class: ['nav-link', (version==@cla_version? 'active' : '')] %>
+      <% end %>
+    </nav>
+  </div>
+</div>

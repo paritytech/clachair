@@ -7,10 +7,16 @@ class ClasController < ApplicationController
     @clas = authorize Cla.all
   end
 
-  def show; end
+  def show
+    @cla_version = if params[:version]
+                     @cla.versions.find(params[:version])
+                   else
+                     @cla.current_version
+                   end
+  end
 
-  def display
-    @cla = Repository.find_by(organization_id: params[:organization], id: params[:repository]).cla
+  def display_for_signing
+    @cla = Organization.find_by(login: params[:organization]).repositories.find_by(name: params[:repository]).cla
   end
 
   def new
@@ -22,7 +28,7 @@ class ClasController < ApplicationController
     if @cla.save
       new_cla_version(@cla.id, params[:cla][:cla_version][:license_text])
       redirect_to @cla
-      flash[:notice] = 'CLA has been created!'
+      flash[:notice] = "CLA has been created!"
     else
       render :new
     end
@@ -34,7 +40,7 @@ class ClasController < ApplicationController
     if @cla.update(cla_params)
       new_cla_version(@cla.id, params[:cla][:cla_version][:license_text])
       redirect_to @cla
-      flash[:notice] = 'CLA has been updated!'
+      flash[:notice] = "CLA has been updated!"
     else
       render :edit
     end

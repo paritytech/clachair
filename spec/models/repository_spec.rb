@@ -7,15 +7,15 @@ RSpec.describe Repository, type: :model do
 
   describe 'load_repositories' do
 
-    context 'creates new repo' do
-      let(:organization) { build :organization, login: 'test-organization' }
+    context 'with no repositories' do
+      let(:organization) { create :organization, login: 'test-organization' }
 
       it 'creates a new Repository record' do
         expect{ Repository.load_repositories(organization) }.to change{ Repository.count }.by(1)
       end
     end
 
-    context 'updates repository' do
+    context 'with existing repositories' do
       it 'updates fields if they were changed' do
         organization = create(:organization,
                               login: 'test-organization',

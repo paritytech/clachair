@@ -1,26 +1,26 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe CallbacksController, :omniauth do
-  describe '#create' do
-    let(:whitelisted_organisations) { ['test_organisation'] }
+  describe "#create" do
+    let(:whitelisted_organisations) { ["test_organisation"] }
     before do
       stub_const("Organization::WHITELISTED_ORGS", whitelisted_organisations)
     end
 
-    context 'existing user' do
+    context "existing user" do
       let(:user) { create :user }
 
       before do
-        request.env['omniauth.auth'] = mock_auth(user)
-        request.env['devise.mapping'] = Devise.mappings[:user]
+        request.env["omniauth.auth"] = mock_auth(user)
+        request.env["devise.mapping"] = Devise.mappings[:user]
       end
 
-      context 'with valid token' do
+      context "with valid token" do
         it "doesn't create a new User object" do
-          expect { post :github }.to_not change{ User.count }
+          expect { post :github }.to_not change { User.count }
         end
 
-        it 'creates a session' do
+        it "creates a session" do
           expect(session).to be_empty
           post :github
           expect(session).not_to be_empty
@@ -28,20 +28,20 @@ describe CallbacksController, :omniauth do
       end
     end
 
-    context 'new user' do
+    context "new user" do
       let(:user) { build :user }
 
       before do
-        request.env['omniauth.auth'] = mock_auth(user)
-        request.env['devise.mapping'] = Devise.mappings[:user]
+        request.env["omniauth.auth"] = mock_auth(user)
+        request.env["devise.mapping"] = Devise.mappings[:user]
       end
 
-      context 'with valid token' do
-        it 'creates a new User object' do
-          expect { post :github }.to change{ User.count }.by(1)
+      context "with valid token" do
+        it "creates a new User object" do
+          expect { post :github }.to change { User.count }.by(1)
         end
 
-        it 'creates a session' do
+        it "creates a session" do
           expect(session).to be_empty
           post :github
           expect(session).not_to be_empty

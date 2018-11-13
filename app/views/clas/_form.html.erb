@@ -6,7 +6,7 @@
           <%= cla.label :cla_name %><br>
           <%= cla.text_field :name, class: 'form-control z-depth-1' %>
         </div>
-        <%= cla.fields_for ClaVersion.new(cla: @cla) do |field| %>
+        <%= cla.fields_for ClaVersion.new(cla: @cla, license_text: @cla.current_version&.license_text) do |field| %>
           <div class="form-group">
             <%= field.label :license_text %><br />
             <%= field.text_area :license_text, class: 'form-control z-depth-1', rows: '10' %>

@@ -1,9 +1,4 @@
-<div class="row">
-  <div class="col-8 offset-2">
-    <br>
-    <h1 align="center"><%= cla.name %></h1>
-    <p>
-      <%= markdown(cla.cla_versions.last.license_text) %>
-    </p>
-  </div>
-</div>
+<h1 align="center"><%= cla.name %></h1>
+<p>
+  <%= markdown(cla_version.license_text) %>
+</p>
