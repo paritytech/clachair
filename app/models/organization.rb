@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Organization < ApplicationRecord
-  WHITELISTED_ORGS = (ENV['ORGANIZATIONS'] || '').split(',').map(&:downcase).freeze
+  WHITELISTED_ORGS = (ENV["ORGANIZATIONS"] || "").split(",").map(&:downcase).freeze
 
   validates :login, :uid, presence: true, uniqueness: true
 

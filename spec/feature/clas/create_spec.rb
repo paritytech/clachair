@@ -24,4 +24,11 @@ feature 'Whitelisted user creates CLA' do
 
     expect(page).to have_content("Name can't be blank")
   end
+
+  it 'with empty license_text field' do
+    fill_in 'cla_name', with: 'TEST CLA NAME'
+    click_on 'Create CLA version'
+
+    expect(page).to have_content("License text can't be blank")
+  end
 end
