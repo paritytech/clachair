@@ -26,29 +26,28 @@ class ClasController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @cla = Cla.new(cla_params)
-
-      if @cla.save
-        cla_version = create_cla_version(@cla.id, params[:cla][:cla_version][:license_text])
-        if cla_version.save
-          redirect_to @cla
-          flash[:notice] = "CLA has been created!"
-        else
-          @cla.errors.merge!(cla_version.errors)
-          render :new
-          raise ActiveRecord::Rollback
-        end
-      else
-        render :new
-        raise ActiveRecord::Rollback
-      end
+      @cla.save!
+      @cla_version = @cla.versions.new(license_text: params[:cla][:cla_version][:license_text])
+      @cla_version.save!
+      redirect_to @cla
+      flash[:notice] = "CLA has been created!"
     end
+  rescue ActiveRecord::RecordInvalid
+    @cla.errors.merge!(@cla_version&.errors) if @cla_version&.errors
+    render :new
   end
 
   def edit; end
 
   def update
-    if @cla.update(cla_params)
-      cla_version = create_cla_version(@cla.id, params[:cla][:cla_version][:license_text])
+    license_text = params[:cla][:cla_version][:license_text]
+
+    if @cla.update(cla_params) && license_text == @cla.current_version.license_text
+      redirect_to @cla
+      flash[:notice] = "CLA name has been updated!"
+    elsif @cla.update(cla_params) && license_text != @cla.current_version.license_text
+      cla_version = @cla.versions.new(license_text: license_text)
+
       if cla_version.save
         redirect_to @cla
         flash[:notice] = "CLA has been updated!"
@@ -62,10 +61,6 @@ class ClasController < ApplicationController
   end
 
   private
-
-  def create_cla_version(cla_id, license_text)
-    ClaVersion.new(cla_id: cla_id, license_text: license_text)
-  end
 
   def cla_params
     params.require(:cla).permit(:name)
