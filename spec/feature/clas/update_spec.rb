@@ -28,7 +28,7 @@ feature "Edit Cla" do
       click_on "Create CLA"
     end.to change { cla.versions.count }.by(0)
 
-    expect(page).to have_content("CLA name has been updated!")
+    expect(page).to have_content("CLA has been updated!")
   end
 
   scenario "with empty cla_name field" do
@@ -36,13 +36,13 @@ feature "Edit Cla" do
     fill_in "cla_cla_version_license_text", with: "UPDATED CLA LICENSE TEXT"
     click_on "Create CLA"
 
-    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Validation failed: Name can't be blank")
   end
 
   scenario "with empty license_text field" do
     fill_in "cla_cla_version_license_text", with: ""
     click_on "Create CLA"
 
-    expect(page).to have_content("License text can't be blank")
+    expect(page).to have_content("Validation failed: License text can't be blank")
   end
 end

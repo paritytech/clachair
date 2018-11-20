@@ -15,6 +15,6 @@ feature "User visits the CLA page for a repo" do
     expect(page).to have_content(cla.name)
     expect(page).to have_selector("h1", text: "First")
     expect(page).to have_selector("h2", text: "Second")
-    expect(page).to have_button("Sign this CLA")
+    expect(page).to have_content("Please, sign in (GitHub), to Sign this CLA")
   end
 end

@@ -3,9 +3,15 @@
 <%= render 'license', cla: @cla, cla_version: @cla.current_version %>
 
 <div align="center">
-  <p>
-    <button type="button" class="btn btn-lg btn-success">
-      Sign this CLA
-    </button>
-  </p>
+  <%- if signed_in? %>
+    <%- if current_user.user?  %>
+      <p>
+        <button type="button" class="btn btn-lg btn-success">
+          Sign this CLA
+        </button>
+      </p>
+    <% end %>
+  <%- else %>
+    Please, <%= link_to 'sign in (GitHub)', user_github_omniauth_authorize_path %>, to Sign this CLA
+  <% end %>
 </div>

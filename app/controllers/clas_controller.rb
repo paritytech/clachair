@@ -27,13 +27,11 @@ class ClasController < ApplicationController
     ActiveRecord::Base.transaction do
       @cla = Cla.new(cla_params)
       @cla.save!
-      @cla_version = @cla.versions.new(license_text: params[:cla][:cla_version][:license_text])
-      @cla_version.save!
-      redirect_to @cla
-      flash[:notice] = "CLA has been created!"
+      @cla.versions.create!(license_text: params[:cla][:cla_version][:license_text])
+      redirect_to @cla, notice: "CLA has been created!"
     end
-  rescue ActiveRecord::RecordInvalid
-    @cla.errors.merge!(@cla_version&.errors) if @cla_version&.errors
+  rescue ActiveRecord::RecordInvalid => error
+    flash[:alert] = error.message
     render :new
   end
 
@@ -41,23 +39,13 @@ class ClasController < ApplicationController
 
   def update
     license_text = params[:cla][:cla_version][:license_text]
-
-    if @cla.update(cla_params) && license_text == @cla.current_version.license_text
-      redirect_to @cla
-      flash[:notice] = "CLA name has been updated!"
-    elsif @cla.update(cla_params) && license_text != @cla.current_version.license_text
-      cla_version = @cla.versions.new(license_text: license_text)
-
-      if cla_version.save
-        redirect_to @cla
-        flash[:notice] = "CLA has been updated!"
-      else
-        @cla.errors.merge!(cla_version.errors)
-        render :edit
-      end
-    else
-      render :edit
-    end
+    @cla.name = params[:cla][:name]
+    @cla.save! if @cla.changed?
+    @cla.versions.create!(license_text: license_text) if license_text != @cla.current_version.license_text
+    redirect_to @cla, notice: "CLA has been updated!"
+  rescue ActiveRecord::RecordInvalid => error
+    flash[:alert] = error.message
+    render :edit
   end
 
   private
