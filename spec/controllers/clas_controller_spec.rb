@@ -45,11 +45,11 @@ RSpec.describe ClasController, type: :controller do
   end
 
   describe "POST #create" do
-    let(:valid_params) { { cla: { name: "New CLA", cla_version: { license_text: "New Cla version text" }}} }
+    let(:valid_params) { { cla: { name: "New CLA", license_text: "New Cla version text" }} }
 
     context "role: Admin" do
       let(:admin_user)      { create(:user, role: :admin) }
-      let(:invalid_params)  { { cla: { name: "", cla_version: { license_text: "" }}} }
+      let(:invalid_params)  { { cla: { name: "",  license_text: "" }} }
 
       before { sign_in admin_user }
 
@@ -100,12 +100,12 @@ RSpec.describe ClasController, type: :controller do
   end
 
   describe "PATCH #update" do
-    let(:valid_params) { { cla: { name: "Updated CLA", cla_version: { license_text: "Updated Cla version text" }}} }
-    let!(:cla)         { create(:cla, :with_cla_versions) }
+    let(:valid_params)  { { cla: { name: "Updated CLA", license_text: "Updated Cla version text" }} }
+    let(:cla)           { create(:cla) }
 
     context "role: Admin" do
       let(:admin_user)      { create(:user, role: :admin) }
-      let(:invalid_params)  { { cla: { name: "", cla_version: { license_text: "" }}} }
+      let(:invalid_params)  { { cla: { name: "", license_text: "" }} }
 
       before { sign_in admin_user }
 
@@ -120,14 +120,14 @@ RSpec.describe ClasController, type: :controller do
       end
 
       it "with valid attributes, changed only cla name, not changed cla_versions count" do
-        with_same_license_text = { cla: { name: "Updated CLA", cla_version: { license_text: cla.current_version.license_text }}}
+        with_same_license_text = { cla: { name: "Updated CLA", license_text: cla.current_version.license_text }}
 
         expect { patch :update, params: with_same_license_text.merge!(id: cla.id) }.to change{ cla.versions.count }.by(0)
 
         cla.reload
 
         expect(cla.name).to eq("Updated CLA")
-        expect(cla.current_version.license_text).to eq(with_same_license_text[:cla][:cla_version][:license_text])
+        expect(cla.current_version.license_text).to eq(with_same_license_text[:cla][:license_text])
         expect(response).to redirect_to cla_path(assigns(:cla))
       end
 

@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Cla, type: :model do
+  subject { Cla.new(name: "Here is the content", license_text: "Here is the content") }
+
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
   it { should have_many(:versions) }
 
   context "with multiple versions" do
-    subject { create :cla, :with_cla_versions }
+    subject { create :cla }
     let(:oldest_cla) { ClaVersion.order(created_at: :asc).first }
     let(:freshest_cla) { ClaVersion.order(created_at: :asc).last }
 

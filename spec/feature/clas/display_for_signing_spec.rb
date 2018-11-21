@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "User visits the CLA page for a repo" do
-  given(:cla) { create(:cla, :with_cla_versions, count: 5) }
+  given(:cla) { create(:cla) }
   given!(:cla_version) { create(:cla_version, cla: cla, license_text: "#First\n\n##Second") }
   given(:organization) { create(:organization) }
   given(:repository) { create(:repository, cla: cla, organization_id: organization.id) }

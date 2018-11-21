@@ -14,8 +14,8 @@ feature "Edit Cla" do
 
   scenario "with updated valid fiels" do
     fill_in "cla_name", with: "UDATED CLA NAME"
-    fill_in "cla_cla_version_license_text", with: "UPDATED CLA LICENSE TEXT"
-    click_on "Update CLA version"
+    fill_in "cla_license_text", with: "UPDATED CLA LICENSE TEXT"
+    click_on "Update CLA"
 
     expect(page).to have_content("CLA has been updated!")
     expect(page).to have_content("UDATED CLA NAME")
@@ -25,7 +25,7 @@ feature "Edit Cla" do
   scenario "with updated cla_name and same text" do
     expect do
       fill_in "cla_name", with: "UDATED CLA NAME"
-      click_on "Update CLA version"
+      click_on "Update CLA"
     end.to change { cla.versions.count }.by(0)
 
     expect(page).to have_content("CLA has been updated!")
@@ -33,15 +33,15 @@ feature "Edit Cla" do
 
   scenario "with empty cla_name field" do
     fill_in "cla_name", with: ""
-    fill_in "cla_cla_version_license_text", with: "UPDATED CLA LICENSE TEXT"
-    click_on "Update CLA version"
+    fill_in "cla_license_text", with: "UPDATED CLA LICENSE TEXT"
+    click_on "Update CLA"
 
     expect(page).to have_content("Validation failed: Name can't be blank")
   end
 
   scenario "with empty license_text field" do
-    fill_in "cla_cla_version_license_text", with: ""
-    click_on "Update CLA version"
+    fill_in "cla_license_text", with: ""
+    click_on "Update CLA"
 
     expect(page).to have_content("Validation failed: License text can't be blank")
   end
