@@ -25,7 +25,7 @@ class ClasController < ApplicationController
 
   def create
     ActiveRecord::Base.transaction do
-      @cla = Cla.new(cla_params)
+      @cla = authorize Cla.new(cla_params)
       @cla.save!
       @cla.versions.create!(license_text: params[:cla][:cla_version][:license_text])
       redirect_to @cla, notice: "CLA has been created!"
@@ -39,6 +39,7 @@ class ClasController < ApplicationController
 
   def update
     license_text = params[:cla][:cla_version][:license_text]
+    authorize @cla
     @cla.name = params[:cla][:name]
     @cla.save! if @cla.changed?
     @cla.versions.create!(license_text: license_text) if license_text != @cla.current_version.license_text
