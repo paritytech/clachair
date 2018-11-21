@@ -26,8 +26,8 @@ class ClasController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @cla = authorize Cla.new(cla_params)
+      # We can't use `create!` here, since we need @cla initialized even in case of failed validations
       @cla.save!
-      @cla.versions.create!(license_text: params[:cla][:cla_version][:license_text])
       redirect_to @cla, notice: "CLA has been created!"
     end
   rescue ActiveRecord::RecordInvalid => error
@@ -38,11 +38,8 @@ class ClasController < ApplicationController
   def edit; end
 
   def update
-    license_text = params[:cla][:cla_version][:license_text]
-    authorize @cla
-    @cla.name = params[:cla][:name]
-    @cla.save! if @cla.changed?
-    @cla.versions.create!(license_text: license_text) if license_text != @cla.current_version.license_text
+    @cla.assign_attributes(cla_params)
+    @cla.save!
     redirect_to @cla, notice: "CLA has been updated!"
   rescue ActiveRecord::RecordInvalid => error
     flash[:alert] = error.message
@@ -52,7 +49,7 @@ class ClasController < ApplicationController
   private
 
   def cla_params
-    params.require(:cla).permit(:name)
+    params.require(:cla).permit(:name, :license_text)
   end
 
   def set_cla

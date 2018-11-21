@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-10 offset-1">
+    <div class="form-group">
+      <%= form_for cla do |cla| %>
+        <div class="form-group">
+          <%= cla.label :name %><br>
+          <%= cla.text_field :name, class: 'form-control z-depth-1' %>
+        </div>
+        <div class="form-group">
+          <%= cla.label :license_text %><br />
+          <%= cla.text_area :license_text, class: 'form-control z-depth-1', rows: '10' %>
+        </div>
+        <div class="form-actions" align="center">
+          <%= link_to 'Cancel', :back %>
+          <%= cla.submit yield, class: 'btn btn-info' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
