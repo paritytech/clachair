@@ -101,7 +101,7 @@ RSpec.describe ClasController, type: :controller do
 
   describe "PATCH #update" do
     let(:valid_params)  { { cla: { name: "Updated CLA", license_text: "Updated Cla version text" }} }
-    let(:cla)           { create(:cla) }
+    let!(:cla)          { create(:cla) }
 
     context "role: Admin" do
       let(:admin_user)      { create(:user, role: :admin) }

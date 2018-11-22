@@ -4,7 +4,7 @@ require "rails_helper"
 
 feature "Edit Cla" do
   let(:user) { create(:user, role: :admin) }
-  let(:cla)  { create(:cla, :with_cla_versions) }
+  let(:cla)  { create(:cla) }
 
   background do
     logged_in_as user

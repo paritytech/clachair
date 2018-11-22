@@ -11,8 +11,10 @@
           <%= cla.text_area :license_text, class: 'form-control z-depth-1', rows: '10' %>
         </div>
         <div class="form-actions" align="center">
-          <%= link_to 'Cancel', :back %>
-          <%= cla.submit yield, class: 'btn btn-info' %>
+          <div class="btn-group" >
+            <%= cla.submit yield, class: 'btn btn-outline-info my-2 my-sm-0' %>
+            <%= link_to 'Cancel', :back, class: 'btn btn-outline-info my-2 my-sm-0' %>
+          </div>
         </div>
       <% end %>
     </div>

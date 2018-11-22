@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "Admin user visits a CLA management page" do
   given(:user) { create(:user, role: :admin) }
-  given(:cla) { create(:cla, :with_cla_versions) }
+  given(:cla) { create(:cla) }
   given(:organization) { create(:organization) }
   given(:repository) { create(:repository, cla: cla, organization_id: organization.id) }
 

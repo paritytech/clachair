@@ -19,6 +19,7 @@ class Cla < ApplicationRecord
   end
 
   def update_license_text
+    return unless license_text
     return if current_version && license_text == current_version.license_text
 
     versions.create!(license_text: license_text)
