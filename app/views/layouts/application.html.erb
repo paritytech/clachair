@@ -10,12 +10,16 @@
 </head>
   <body>
     <%= render 'layouts/navbar'%>
-    <%= render 'layouts/messages' %>
-
-    <div class="container-fluid">
+    <div class="container">
       <br>
+      <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
 
+    <div class="footer bg-light">
+      <em>
+        Copyright <%= DateTime.now.year %> Parity Technologies. All Rights Reserved.
+      </em>
+    </div>
   </body>
 </html>

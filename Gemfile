@@ -41,6 +41,7 @@ gem 'omniauth-github'
 gem 'github_api'
 gem 'delayed_job_active_record'
 gem 'pundit'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

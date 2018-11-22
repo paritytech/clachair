@@ -1,36 +1,46 @@
 require 'rails_helper'
 
-feature 'User visited the organisations page' do
-  given(:organization){ create(:organization, :with_repositories, count: 5) }
+feature 'User visited the repository page' do
+  given(:organization) { create(:organization, :with_repositories, count: 5) }
+  given(:repository) { organization.repositories.fifth }
 
-  context 'with role: whitelisted_user' do
+  context 'as whitelisted user' do
     given(:user) { create(:user, role: :admin) }
 
     background do
       logged_in_as user
+      visit repository_path(repository)
     end
 
     scenario 'and saw repository information' do
-      repository = organization.repositories.third
-      visit repository_path(repository)
-
       expect(page).to have_content(repository.name)
       expect(page).to have_content(repository.desc)
       expect(page).to have_content(repository.license_name)
       expect(page).to have_content(repository.license_spdx_id)
     end
+
+    scenario 'and saw cla dropdown and update button' do
+      cla         = create(:cla, name: 'cla')
+      another_cla = create(:cla, name: 'another_cla')
+
+      visit repository_path(repository)
+      expect(page).to have_select 'repository_cla_id', with_options: [cla.name, another_cla.name]
+      select(another_cla.name).select_option
+      click_on('Update Repository')
+
+      expect(page).to have_link(another_cla.name)
+      expect(page).to have_select 'repository_cla_id', visible: another_cla.name
+    end
   end
 
-  context 'with role: user' do
+  context 'as non-whitelisted user' do
     given(:user) { create(:user) }
 
     background do
       logged_in_as user
-      visit organization_path(organization)
     end
 
     scenario 'and does not saw repository information' do
-      repository = organization.repositories.fifth
       visit repository_path(repository)
 
       expect(page).to_not have_content(repository.name)
@@ -42,11 +52,9 @@ feature 'User visited the organisations page' do
   end
 
   context 'without registration' do
-    background do
-      visit organization_path(organization)
-    end
-
     scenario 'and does not saw repository information' do
+      visit repository_path(repository)
+
       expect(page).to_not have_link(organization.repositories.first.name)
       expect(page).to_not have_link(organization.repositories.fifth.name)
       expect(page).to have_content('You are not authorized for this action')

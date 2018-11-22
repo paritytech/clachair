@@ -1,8 +1,5 @@
 <%- if signed_in? %>
-  <h1 align="center"> Hello, <%= current_user.name %></h1>
-  <br>
-  <p align="center"><%= link_to "Contributor's License Agreement", cla_path(organisation: 'paritytech', repository: 'parity-bitcoin') %></p>
+  <h1 align="center"> Hello, <%= current_user.name %>!</h1>
 <%- else %>
-  <h1 align="center"> Hello, please read: </h1>
-  <p align="center"><%= link_to "Contributor's License Agreement", cla_path(organisation: 'paritytech', repository: 'parity-bitcoin') %></p>
+  <h1 align="center"> Hello! </h1>
 <% end %>

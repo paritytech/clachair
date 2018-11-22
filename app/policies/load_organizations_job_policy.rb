@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OrganizationPolicy
+class LoadOrganizationsJobPolicy
   attr_reader :current_user, :organization
 
   def initialize(current_user, organization)
@@ -8,11 +8,7 @@ class OrganizationPolicy
     @organization = organization
   end
 
-  def index?
-    admin?
-  end
-
-  def show?
+  def trigger_refresh?
     admin?
   end
 

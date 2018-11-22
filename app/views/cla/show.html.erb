@@ -1,8 +1,0 @@
-<%- if signed_in?%>
-  <h1 align="center"> Hello, <%= current_user.name %>, please read: </h1>
-  <br>
-  <%=render 'license' %>
-<%- else %>
-  <h1 align="center"> Hello, please read: </h1>
-  <%=render 'license' %>
-<% end %>

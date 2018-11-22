@@ -1,5 +1,11 @@
 <div class="row">
- <div class="col-8 offset-2">
+ <div class="col-10 offset-1">
+   <br>
+   <div align="center">
+     <%= link_to 'Load Organizations', trigger_refresh_path, method: :post, class: 'btn btn-outline-info my-2 my-sm-0' %>
+   </div>
+   <br>
+   <br>
    <h1 align="center">Organizations list:</h1>
    <ul class="list-group">
      <%- @organizations.each do |organization| %>

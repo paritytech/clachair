@@ -9,6 +9,16 @@ class RepositoryPolicy
   end
 
   def show?
+    admin?
+  end
+
+  def update?
+    admin?
+  end
+
+  private
+
+  def admin?
     @current_user&.admin?
   end
 end

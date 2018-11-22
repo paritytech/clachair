@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-10 offset-1">
+    <div class="row">
+      <div class="col-8">
+        <%= render 'license', cla: @cla, cla_version: @cla_version %>
+      </div>
+      <div class="col-4">
+        <div class="row">
+          <div class="col-7">
+            <p class="navbar-brand">
+              Revisions
+            </p>
+          </div>
+          <div class="col-5">
+            <%= link_to 'Add new', edit_cla_path(@cla), class: 'btn btn-outline-info my-2 my-sm-0' %>
+          </div>
+        </div>
+        <nav class="nav nav-pills flex-column">
+          <% @cla.versions.each do |version| %>
+            <%= link_to version.created_at, { version: version.id }, class: ['nav-link', (version==@cla_version? 'active' : '')] %>
+          <% end %>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

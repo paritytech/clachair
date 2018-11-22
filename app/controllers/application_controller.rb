@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def pundishing_user
-    flash[:alert] = 'You are not authorized for this action'
+    flash[:alert] = "You are not authorized for this action"
     redirect_to root_path
   end
 end

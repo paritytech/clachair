@@ -1,4 +1,3 @@
-require: rubocop-rspec
 AllCops:
   Include:
   - "app/**/*.rb"
@@ -13,6 +12,8 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
 Metrics/LineLength:
   Max: 125
 Metrics/MethodLength:

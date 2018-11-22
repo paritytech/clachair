@@ -1,12 +1,12 @@
-require 'simplecov'
-SimpleCov.start 'rails'
+require "simplecov"
+SimpleCov.start "rails"
 
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require "spec_helper"
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path("../../config/environment", __FILE__)
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
+require "rspec/rails"
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
@@ -15,7 +15,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -28,7 +28,7 @@ OmniAuth.config.test_mode = true
 ActiveJob::Base.queue_adapter = :test
 
 VCR.configure do |config|
-  config.default_cassette_options = { allow_playback_repeats: true }
+  config.default_cassette_options = {allow_playback_repeats: true}
 end
 
 RSpec.configure do |config|
