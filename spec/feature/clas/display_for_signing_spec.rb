@@ -49,5 +49,11 @@ feature "User visits the CLA page for a repo" do
       expect(page).to have_button "Submit", disabled: true
       expect(page).to have_field "cla_signature_real_name", with: user.name
     end
+
+    scenario "the button is enabled when the checkbox is checked", js: true do
+      expect(page).to have_no_button "Submit", disabled: false
+      page.find(:css, "#accept").set(true)
+      expect(page).to have_button "Submit", disabled: false
+    end
   end
 end
