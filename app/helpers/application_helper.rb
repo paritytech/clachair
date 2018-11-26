@@ -21,4 +21,8 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+
+  def decorate_date(date)
+    date.strftime("%A, %b %d, %Y, %H:%M:%S, %Z")
+  end
 end

@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :email }
   it { should validate_uniqueness_of(:uid) }
   it { should validate_uniqueness_of(:login) }
+  it { should have_many(:cla_signatures) }
 
   describe 'from_omniauth' do
     context 'the user already in the DB' do

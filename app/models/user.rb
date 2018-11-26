@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   validates :login, :email, :uid, presence: true, uniqueness: true
 
+  has_many :cla_signatures
+
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize(
       email: auth.info.email,

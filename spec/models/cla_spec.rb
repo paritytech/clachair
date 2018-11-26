@@ -6,6 +6,7 @@ RSpec.describe Cla, type: :model do
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
   it { should have_many(:versions) }
+  it { should have_many(:cla_signatures) }
 
   context "with multiple versions" do
     subject { create :cla }
