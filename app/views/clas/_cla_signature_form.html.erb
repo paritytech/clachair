@@ -6,7 +6,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text"><b>I, </b></div>
         </div>
-        <%= cla_signature.text_field :real_name, value: current_user.name, autofocus: true, class: "form-control" %>
+        <%= cla_signature.text_field :real_name, value: current_user.real_name, autofocus: true, class: "form-control" %>
       </div>
 
       <%= cla_signature.hidden_field :repository_id, value: repository.id %>

@@ -46,6 +46,7 @@ RSpec.configure do |config|
   config.include OmniauthMacros, type: :feature
   config.include OmniauthMacros, type: :model
   config.include OmniauthMacros, type: :controller
+  config.include ApplicationHelper
 end
 
 Capybara.register_driver :selenium_chrome do |app|

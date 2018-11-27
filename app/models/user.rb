@@ -8,6 +8,10 @@ class User < ApplicationRecord
 
   has_many :cla_signatures
 
+  def real_name
+    cla_signatures.last&.real_name || name
+  end
+
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize(
       email: auth.info.email,
