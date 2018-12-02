@@ -1,22 +1,17 @@
 <h2 align="center"> Hello, please read and sign: </h2>
 <hr>
 <br>
-<% cla = @repository.cla %>
-<%= render "license", cla: cla, cla_version: cla.current_version %>
+<%= render "clas/license", cla: @repository.cla, cla_version: @repository.cla.current_version %>
 
 <div class="row">
   <div class="col-10 offset-1">
     <%- if signed_in? %>
       <%- if current_user.user? %>
-
-        <% user_current_signature       = current_user.cla_signatures.find_by(cla_version: cla.current_version) %>
-        <% user_all_versions_signatures = current_user.cla_signatures.where(cla: cla).map(&:cla_version) %>
-
-        <%- if user_all_versions_signatures.include?(cla.current_version) %>
+        <%- if current_user.current_signed_cla_version(@repository) %>
           <div class="alert alert-info text-center">
-            You have already signed this CLA at: <%= decorate_date(user_current_signature.created_at)%>
+            You have already signed this CLA at: <%= decorate_date(current_user.current_signed_cla_version(@repository).created_at)%>
           </div>
-        <%- elsif user_all_versions_signatures.empty? %>
+        <%- elsif current_user.all_signed_cla_versions(@repository).empty? %>
           <%= render "cla_signature_form", cla_signature: @cla_signature, repository: @repository %>
         <%- else %>
           <%= render "cla_signature_form", cla_signature: @cla_signature, repository: @repository %>
@@ -25,11 +20,7 @@
           <div class="row"  align="center">
             <div class="col-10 offset-1">
               <h4>You have already signed a previous version(s) of this CLA:</h4>
-              <div class="list-group">
-                <% user_all_versions_signatures.each do |cla_version|%>
-                  <%= link_to decorate_date(cla_version.created_at), cla_version_path(cla, cla_version), class:"list-group-item list-group-item-action list-group-item-light" %>
-                <% end %>
-              </div>
+              <%= render "all_signed_cla_versions", repository: @repository %>
             </div>
           </div>
         <% end %>

@@ -12,6 +12,14 @@ class User < ApplicationRecord
     cla_signatures.last&.real_name || name
   end
 
+  def current_signed_cla_version(repository)
+    cla_signatures.find_by(cla_version: repository.cla.current_version, repository: repository)
+  end
+
+  def all_signed_cla_versions(repository)
+    cla_signatures.where(repository: repository).map(&:cla_version)
+  end
+
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize(
       email: auth.info.email,

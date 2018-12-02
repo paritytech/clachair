@@ -17,6 +17,6 @@ class ClaSignaturesController < ApplicationController
   end
 
   def cla_signtaure_params
-    params.require(:cla_signature).permit(:real_name, :repository_id, :cla_id, :cla_version_id, :user_id)
+    params.require(:cla_signature).permit(:real_name, :repository_id, :cla_version_id, :user_id)
   end
 end

@@ -7,7 +7,6 @@ class Cla < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   has_many :versions, -> { order(created_at: :desc) }, class_name: "ClaVersion"
-  has_many :cla_signatures
 
   def current_version
     versions.first

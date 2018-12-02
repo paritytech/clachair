@@ -2,7 +2,6 @@
 
 class ClaSignature < ApplicationRecord
   belongs_to :user
-  belongs_to :cla
   belongs_to :cla_version
   belongs_to :repository
 

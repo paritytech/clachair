@@ -17,13 +17,11 @@ ActiveRecord::Schema.define(version: 2018_11_23_122108) do
 
   create_table "cla_signatures", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "cla_id"
     t.bigint "cla_version_id"
     t.bigint "repository_id"
     t.string "real_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cla_id"], name: "index_cla_signatures_on_cla_id"
     t.index ["cla_version_id"], name: "index_cla_signatures_on_cla_version_id"
     t.index ["repository_id"], name: "index_cla_signatures_on_repository_id"
     t.index ["user_id"], name: "index_cla_signatures_on_user_id"
@@ -99,7 +97,6 @@ ActiveRecord::Schema.define(version: 2018_11_23_122108) do
   end
 
   add_foreign_key "cla_signatures", "cla_versions"
-  add_foreign_key "cla_signatures", "clas"
   add_foreign_key "cla_signatures", "repositories"
   add_foreign_key "cla_signatures", "users"
   add_foreign_key "cla_versions", "clas"
