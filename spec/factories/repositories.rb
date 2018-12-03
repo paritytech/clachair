@@ -6,5 +6,7 @@ FactoryBot.define do
     sequence(:license_spdx_id) { |i| "spdx_id#{i}" }
     sequence(:github_url) { |i| "https://github.com/#{i}" }
     sequence(:desc) { |i| "description#{i}" }
+
+    association :organization
   end
 end

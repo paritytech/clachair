@@ -2,14 +2,14 @@
 
 class User < ApplicationRecord
   devise :rememberable, :omniauthable, omniauth_providers: [:github]
-  enum role: { user: 0, admin: 100 }
+  enum role: {user: 0, admin: 100}
 
   validates :login, :email, :uid, presence: true, uniqueness: true
 
   has_many :cla_signatures
 
   def real_name
-    cla_signatures.last&.real_name || name
+    cla_signatures.order(created_at: :desc).first&.real_name || name
   end
 
   def current_signed_cla_version(repository)
@@ -24,10 +24,10 @@ class User < ApplicationRecord
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize(
       email: auth.info.email,
       name: auth.info.name,
-      login: auth.extra.raw_info.login
+      login: auth.extra.raw_info.login,
     )
-    user.token  = auth.credentials.token
-    user.role   = role_for user
+    user.token = auth.credentials.token
+    user.role = role_for user
     user
   end
 

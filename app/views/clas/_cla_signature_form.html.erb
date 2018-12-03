@@ -11,7 +11,6 @@
 
       <%= cla_signature.hidden_field :repository_id, value: repository.id %>
       <%= cla_signature.hidden_field :cla_version_id, value: repository.cla.current_version.id %>
-      <%= cla_signature.hidden_field :cla_id, value: repository.cla.id %>
       <%= cla_signature.hidden_field :user_id, value: current_user.id %>
 
       <div class="form-check mb-2 mr-sm-2">

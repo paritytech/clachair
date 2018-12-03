@@ -82,12 +82,11 @@ feature "User visits the CLA page for a repo" do
       scenario "and sees a rendered repo with his name an disabled Sign button" do
         expect(page).to have_content("Hello, please read and sign:")
         expect(page).to have_content(cla.name)
-        expect(page).to have_content(cla.name)
         expect(page).to have_selector("h1", text: "First")
         expect(page).to have_selector("h2", text: "Second")
         expect(page).to have_unchecked_field("accept")
         expect(page).to have_button "Submit", disabled: true
-        expect(page).to have_field "cla_signature_real_name", with: user.real_name
+        expect(page).to have_field "cla_signature_real_name", with: "Real name"
       end
     end
   end
