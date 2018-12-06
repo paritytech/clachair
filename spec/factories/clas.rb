@@ -3,11 +3,11 @@ FactoryBot.define do
     sequence(:name) { |i| "name#{i}" }
 
     transient do
-      count { 5 }
+      versions_count { 5 }
     end
 
     after(:create) do |cla, evaluator|
-      create_list(:cla_version, evaluator.count, cla_id: cla.id)
+      create_list(:cla_version, evaluator.versions_count, cla_id: cla.id)
     end
   end
 end

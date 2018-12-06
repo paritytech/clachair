@@ -13,18 +13,18 @@ feature "Admin user visits a CLA management page" do
 
   scenario "and sees CLA title and contents" do
     expect(page).to have_content(cla.name)
-    expect(page).to have_content(cla.current_version.license_text)
+    expect(page.html).to include(markdown(cla.current_version.license_text))
   end
 
   context "for an older CLA version" do
-    given(:cla_version) { cla.versions.last }
+    given(:cla_version) { create :cla_version, cla: cla, license_text: "Something _completely_ different", created_at: 1.hour.ago }
     before do
       visit cla_path(cla, version: cla_version)
     end
 
     scenario "and sees older CLA contents" do
-      expect(page).to_not have_content(cla.current_version.license_text)
-      expect(page).to have_content(cla_version.license_text)
+      expect(page.html).to_not include(markdown(cla.current_version.license_text))
+      expect(page.html).to include(markdown(cla_version.license_text))
     end
   end
 end
