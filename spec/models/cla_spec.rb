@@ -54,7 +54,7 @@ RSpec.describe Cla, type: :model do
       end
 
       context "with the same license text but with different whitespace" do
-        let(:license_text) { cla.current_version.license_text.gsub("\n", "\r\n") + "\r\n   " }
+        let(:license_text) { "    \r\n   " + cla.current_version.license_text.gsub("\n", "\r\n") + "\r\n   " }
         it { is_expected.to_not change { ClaVersion.count } }
       end
     end
