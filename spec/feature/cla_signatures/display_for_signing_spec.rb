@@ -67,7 +67,7 @@ feature "User visits the CLA page for a repo" do
 
       cla_signature = ClaSignature.find_by(user: user, cla_version: cla.current_version)
 
-      expect(page).to have_content "CLA has been signed!"
+      expect(page).to have_content "CLA has been signed as #{user.name}!"
       expect(page).to have_content "You have already signed this CLA at: #{decorate_date(cla_signature.created_at)}"
     end
 

@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def all_signed_cla_versions(repository)
-    cla_signatures.where(repository: repository).map(&:cla_version)
+    ClaVersion.joins(:cla_signatures).where(cla_signatures: { repository: repository, user: self })
   end
 
   def self.from_omniauth(auth)
