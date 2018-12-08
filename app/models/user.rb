@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   devise :rememberable, :omniauthable, omniauth_providers: [:github]
-  enum role: {user: 0, admin: 100}
+  enum role: { user: 0, admin: 100 }
 
   validates :login, :email, :uid, presence: true, uniqueness: true
 
@@ -24,7 +24,7 @@ class User < ApplicationRecord
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize(
       email: auth.info.email,
       name: auth.info.name,
-      login: auth.extra.raw_info.login,
+      login: auth.extra.raw_info.login
     )
     user.token = auth.credentials.token
     user.role = role_for user
