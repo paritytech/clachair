@@ -16,7 +16,15 @@ class RepositoryPolicy
     admin?
   end
 
+  def create?
+    user?
+  end
+
   private
+
+  def user?
+    @current_user&.user?
+  end
 
   def admin?
     @current_user&.admin?

@@ -7,6 +7,7 @@ class Repository < ApplicationRecord
 
   belongs_to :cla, optional: true
   belongs_to :organization
+  has_many :cla_signatures
 
   def self.load_repositories(organization)
     org_repos = Github.new.repos.list user: organization.login

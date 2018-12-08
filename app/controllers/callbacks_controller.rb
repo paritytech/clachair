@@ -11,7 +11,6 @@ class CallbacksController < Devise::OmniauthCallbacksController
 
   def destroy
     reset_session
-    redirect_to root_path
-    flash[:notice] = "Signed out successfully."
+    redirect_to root_path, notice: "Signed out successfully."
   end
 end

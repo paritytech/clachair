@@ -16,7 +16,13 @@ class ClasController < ApplicationController
   end
 
   def display_for_signing
-    @cla = Organization.find_by(login: params[:organization]).repositories.find_by(name: params[:repository]).cla
+    @repository = Organization.find_by(login: params[:organization]).repositories.find_by(name: params[:repository])
+    @cla_signature = ClaSignature.new
+  end
+
+  def cla_version
+    @cla = authorize Cla.find(params[:cla])
+    @cla_version = @cla.versions.find(params[:version])
   end
 
   def new

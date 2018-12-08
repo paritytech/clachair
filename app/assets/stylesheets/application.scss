@@ -1,5 +1,12 @@
 @import "bootstrap";
 
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 7rem;
+  min-height: 100%;
+}
+
 .footer {
   position: fixed;
   left: 0;

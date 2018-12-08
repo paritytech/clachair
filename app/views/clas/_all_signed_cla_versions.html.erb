@@ -1,0 +1,5 @@
+<div class="list-group">
+  <% current_user.all_signed_cla_versions(repository).each do |cla_version|%>
+    <%= link_to decorate_date(cla_version.created_at), cla_version_path(repository.cla, cla_version), class:"list-group-item list-group-item-action list-group-item-light" %>
+  <% end %>
+</div>

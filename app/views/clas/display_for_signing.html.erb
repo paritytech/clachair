@@ -1,17 +1,32 @@
 <h2 align="center"> Hello, please read and sign: </h2>
+<hr>
+<br>
+<%= render "clas/license", cla: @repository.cla, cla_version: @repository.cla.current_version %>
 
-<%= render 'license', cla: @cla, cla_version: @cla.current_version %>
-
-<div align="center">
-  <%- if signed_in? %>
-    <%- if current_user.user?  %>
-      <p>
-        <button type="button" class="btn btn-lg btn-success">
-          Sign this CLA
-        </button>
-      </p>
+<div class="row">
+  <div class="col-10 offset-1">
+    <%- if signed_in? %>
+      <%- if current_user.user? %>
+        <%- if current_user.current_signed_cla_version(@repository) %>
+          <div class="alert alert-info text-center">
+            You have already signed this CLA at: <%= decorate_date(current_user.current_signed_cla_version(@repository).created_at)%>
+          </div>
+        <%- elsif current_user.all_signed_cla_versions(@repository).empty? %>
+          <%= render "cla_signature_form", cla_signature: @cla_signature, repository: @repository %>
+        <%- else %>
+          <%= render "cla_signature_form", cla_signature: @cla_signature, repository: @repository %>
+          <hr>
+          <br>
+          <div class="row"  align="center">
+            <div class="col-10 offset-1">
+              <h4>You have already signed a previous version(s) of this CLA:</h4>
+              <%= render "all_signed_cla_versions", repository: @repository %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <%- else %>
+      Please, <%= link_to "sign in (GitHub)", user_github_omniauth_authorize_path %>, to Sign this CLA
     <% end %>
-  <%- else %>
-    Please, <%= link_to 'sign in (GitHub)', user_github_omniauth_authorize_path %>, to Sign this CLA
-  <% end %>
+  </div>
 </div>

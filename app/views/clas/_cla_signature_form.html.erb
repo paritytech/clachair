@@ -1,0 +1,23 @@
+<br>
+<div class="row">
+  <div class="col-8 offset-2">
+    <%= form_for cla_signature, html: { class: "form-inline" } do |cla_signature| %>
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><b>I, </b></div>
+        </div>
+        <%= cla_signature.text_field :real_name, value: current_user.real_name, autofocus: true, class: "form-control" %>
+      </div>
+
+      <%= cla_signature.hidden_field :repository_id, value: repository.id %>
+      <%= cla_signature.hidden_field :cla_version_id, value: repository.cla.current_version.id %>
+      <%= cla_signature.hidden_field :user_id, value: current_user.id %>
+
+      <div class="form-check mb-2 mr-sm-2">
+        <input class="form-check-input" type="checkbox" id="accept">
+        <label class="form-check-label" for="accept">accept this Agreement.</label>
+      </div>
+      <%= cla_signature.submit "Submit", class: "btn btn-info mb-2 mr-sm-2", id: "cla_signature_button", disabled: true %>
+    <% end %>
+  </div>
+</div>

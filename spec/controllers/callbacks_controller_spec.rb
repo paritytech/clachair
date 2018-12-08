@@ -3,8 +3,9 @@ require "rails_helper"
 describe CallbacksController, :omniauth do
   describe "#create" do
     let(:whitelisted_organisations) { ["test_organisation"] }
+
     before do
-      stub_const("Organization::WHITELISTED_ORGS", whitelisted_organisations)
+      allow(Organization).to receive(:whitelisted_orgs).and_return(whitelisted_organisations)
     end
 
     context "existing user" do

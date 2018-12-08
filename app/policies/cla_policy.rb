@@ -13,7 +13,11 @@ class ClaPolicy
   end
 
   def show?
-    admin?
+    admin? || user?
+  end
+
+  def cla_version?
+    admin? || user?
   end
 
   def display?
@@ -40,5 +44,9 @@ class ClaPolicy
 
   def admin?
     @current_user&.admin?
+  end
+
+  def user?
+    @current_user&.user?
   end
 end

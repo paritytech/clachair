@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_11_131010) do
+ActiveRecord::Schema.define(version: 2018_11_23_122108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cla_signatures", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "cla_version_id"
+    t.bigint "repository_id"
+    t.string "real_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cla_version_id"], name: "index_cla_signatures_on_cla_version_id"
+    t.index ["repository_id"], name: "index_cla_signatures_on_repository_id"
+    t.index ["user_id"], name: "index_cla_signatures_on_user_id"
+  end
 
   create_table "cla_versions", force: :cascade do |t|
     t.text "license_text"
@@ -84,6 +96,9 @@ ActiveRecord::Schema.define(version: 2018_11_11_131010) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "cla_signatures", "cla_versions"
+  add_foreign_key "cla_signatures", "repositories"
+  add_foreign_key "cla_signatures", "users"
   add_foreign_key "cla_versions", "clas"
   add_foreign_key "repositories", "clas"
 end

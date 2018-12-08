@@ -8,6 +8,9 @@ require File.expand_path("../../config/environment", __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
 
+require "capybara/rspec"
+require "capybara/rails"
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
@@ -29,6 +32,7 @@ ActiveJob::Base.queue_adapter = :test
 
 VCR.configure do |config|
   config.default_cassette_options = {allow_playback_repeats: true}
+  config.ignore_localhost = true
 end
 
 RSpec.configure do |config|
@@ -42,4 +46,12 @@ RSpec.configure do |config|
   config.include OmniauthMacros, type: :feature
   config.include OmniauthMacros, type: :model
   config.include OmniauthMacros, type: :controller
+  config.include DateHelper
+  config.include MarkdownHelper
 end
+
+Capybara.register_driver :selenium_chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome,
+                                      desired_capabilities: {chromeOptions: {args: %w(headless disable-gpu no-sandbox)}})
+end
+Capybara.javascript_driver = :selenium_chrome
