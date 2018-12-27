@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users,  controllers: { omniauth_callbacks: 'callbacks' }
-  root  'home#index'
+  devise_for :users, controllers: {omniauth_callbacks: "callbacks"}
+  root "home#index"
 
-  post 'trigger_refresh' => 'organizations#trigger_refresh'
-  get  '/cla/:organization/:repository', to: 'clas#display_for_signing', as: :cla_repository
-  get  '/cla_version/:cla/:version', to: 'clas#cla_version', as: :cla_version
+  post "trigger_refresh" => "organizations#trigger_refresh"
+  get "/cla/:organization/:repository", to: "clas#display_for_signing", as: :cla_repository
+  get "/cla_version/:cla/:version", to: "clas#cla_version", as: :cla_version
+
+  post "/github/webhooks" => "github_webhooks#handle"
 
   resources :organizations, only: [:index, :show]
   resources :repositories, only: [:show, :update]
@@ -13,6 +15,6 @@ Rails.application.routes.draw do
   resources :cla_signatures, only: [:create]
 
   devise_scope :user do
-    delete 'destroy_user_session' => 'callbacks#destroy'
+    delete "destroy_user_session" => "callbacks#destroy"
   end
 end
