@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
+# This should be first, to load out config before everything else
+gem 'dotenv-rails', require: 'dotenv/rails-now', group: :development
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use postgresql as the database for Active Record
@@ -50,7 +53,6 @@ group :development, :test do
   gem 'rubocop-rspec'
   gem 'rspec-rails', '~> 3.8'
   gem 'fuubar'
-  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'pry-byebug'
