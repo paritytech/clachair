@@ -277,7 +277,7 @@ GEM
     rspec-support (3.8.0)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (0.70.0)
+    rubocop (0.71.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
@@ -286,7 +286,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-rspec (1.33.0)
       rubocop (>= 0.60.0)
-    ruby-progressbar (1.10.0)
+    ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
     safe_yaml (1.0.5)
@@ -403,7 +403,7 @@ DEPENDENCIES
   redcarpet
   rspec-rails (~> 3.8)
   rspec_junit_formatter
-  rubocop (~> 0.70.0)
+  rubocop (~> 0.71.0)
   rubocop-rspec
   sass-rails (~> 5.0)
   selenium-webdriver
