@@ -67,7 +67,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
-  gem 'shoulda-matchers', '~> 4.0.0'
+  gem 'shoulda-matchers', '~> 4.1.0'
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
   gem 'simplecov', require: false
