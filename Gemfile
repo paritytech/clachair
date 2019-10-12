@@ -48,7 +48,7 @@ group :development, :test do
   gem 'pry'
   gem 'rubocop', '~> 0.75.0', require: false
   gem 'rubocop-rspec'
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', '~> 3.9'
   gem 'fuubar'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
