@@ -46,7 +46,7 @@ gem 'redcarpet'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
-  gem 'rubocop', '~> 0.78.0', require: false
+  gem 'rubocop', '~> 0.79.0', require: false
   gem 'rubocop-rspec'
   gem 'rspec-rails', '~> 3.9'
   gem 'fuubar'
