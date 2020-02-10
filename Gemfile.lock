@@ -125,13 +125,13 @@ GEM
       activesupport (>= 4.2.0)
     hashdiff (1.0.0)
     hashie (3.6.0)
-    i18n (1.8.1)
+    i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
     jaro_winkler (1.5.4)
     jaro_winkler (1.5.4-java)
-    jbuilder (2.9.1)
-      activesupport (>= 4.2.0)
+    jbuilder (2.10.0)
+      activesupport (>= 5.0.0)
     jquery-rails (4.3.5)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -153,7 +153,7 @@ GEM
     mimemagic (0.3.3)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.13.0)
+    minitest (5.14.0)
     msgpack (1.3.1)
     msgpack (1.3.1-java)
     msgpack (1.3.1-x64-mingw32)
@@ -377,7 +377,7 @@ DEPENDENCIES
   factory_bot_rails
   fuubar
   github_api
-  jbuilder (~> 2.9)
+  jbuilder (~> 2.10)
   jquery-rails
   listen (>= 3.0.5, < 3.3)
   omniauth-github
